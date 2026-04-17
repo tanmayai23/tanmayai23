@@ -179,18 +179,52 @@ mission: Build useful AI products, not just demos.
 
 ## 📊 GitHub Analytics
 
+```text
+❯ git log --graph --stats
+```
+
 <div align="center">
 
-<img width="49%" src="https://github-readme-stats.vercel.app/api?username=tanmayai23&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github" />
-<img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=tanmayai23&theme=tokyonight&hide_border=true" />
+<table>
+<tr>
+<td width="50%">
+<img width="100%" src="https://github-readme-stats.vercel.app/api?username=tanmayai23&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=5EEAD4&icon_color=38BDF8&text_color=C9D1D9&ring_color=14B8A6&rank_icon=github" />
+</td>
+<td width="50%">
+<img width="100%" src="https://github-readme-streak-stats.herokuapp.com/?user=tanmayai23&theme=tokyonight&hide_border=true&background=0D1117&stroke=14B8A6&ring=38BDF8&fire=5EEAD4&currStreakLabel=C9D1D9" />
+</td>
+</tr>
+</table>
+
+<br>
+
+<img width="92%" src="https://github-readme-activity-graph.vercel.app/graph?username=tanmayai23&custom_title=Tanmay%20Kala's%20Contribution%20Graph&bg_color=0D1117&color=5EEAD4&line=38BDF8&point=FFFFFF&area=true&hide_border=true" />
 
 <br><br>
 
-<img width="58%" src="https://github-readme-activity-graph.vercel.app/graph?username=tanmayai23&theme=tokyo-night&hide_border=true&area=true" />
+<table>
+<tr>
+<td width="48%">
+<img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tanmayai23&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=5EEAD4&text_color=C9D1D9" />
+</td>
+<td width="52%">
 
-<br><br>
+```yaml
+profile_metrics:
+  focus: AI / ML + Generative AI
+  strongest_languages:
+    - Python
+    - JavaScript
+    - TypeScript
+  current_goal: Build production-grade AI products
+  active_projects:
+    - SwachhVan
+    - Naxatra AI
+```
 
-<img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tanmayai23&layout=compact&theme=tokyonight&hide_border=true" />
+</td>
+</tr>
+</table>
 
 </div>
 
