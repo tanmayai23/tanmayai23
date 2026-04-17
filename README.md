@@ -1,133 +1,165 @@
-<h1 align="center">Hi 👋, I'm Tanmay Kala</h1>
-<h3 align="center">AI/ML Developer • Generative AI Builder • Founder of Naxatra AI</h3>
-
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&pause=1000&center=true&vCenter=true&width=800&lines=AI%2FML+Developer+from+India;Founder+of+Naxatra+AI;Building+with+Generative+AI+and+LLMs;Python+%7C+Machine+Learning+%7C+Vector+Databases" alt="Typing SVG" />
+# Tanmay Kala
 
-<br><br>
+### AI/ML Engineer • Generative AI Builder • Founder @ Naxatra AI
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=26&pause=1200&color=38BDF8&center=true&vCenter=true&width=900&lines=Building+AI+Products+for+Real+Problems;Founder+of+Naxatra+AI;Generative+AI+%7C+LLMs+%7C+RAG+Systems;Turning+Ideas+into+Scalable+AI+Applications" alt="Typing SVG" />
+
+<br>
 
 <a href="https://github.com/tanmayai23">
-  <img src="https://img.shields.io/github/followers/tanmayai23?label=Followers&style=for-the-badge&color=0e75b6" alt="followers"/>
+  <img src="https://img.shields.io/github/followers/tanmayai23?label=GitHub%20Followers&style=for-the-badge&color=2563EB&labelColor=111827" />
 </a>
-<a href="https://github.com/tanmayai23">
-  <img src="https://img.shields.io/github/stars/tanmayai23?affiliations=OWNER&style=for-the-badge&color=8A2BE2" alt="stars"/>
+<a href="https://www.linkedin.com/in/tanmay-kala/">
+  <img src="https://img.shields.io/badge/LinkedIn-Tanmay%20Kala-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
 </a>
 <a href="mailto:tanmaykala171206@gmail.com">
-  <img src="https://img.shields.io/badge/Email-tanmaykala171206%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white" alt="email"/>
+  <img src="https://img.shields.io/badge/Email-Contact%20Me-EA4335?style=for-the-badge&logo=gmail&logoColor=white" />
+</a>
+
+<br><br>
+
+<img src="https://github-profile-trophy.vercel.app/?username=tanmayai23&theme=tokyonight&no-frame=true&row=1&column=6" />
+
+</div>
+
+---
+
+<table>
+<tr>
+<td width="60%">
+
+## 🚀 About Me
+
+```yaml
+name: Tanmay Kala
+role: AI/ML Engineer & Founder of Naxatra AI
+specialization:
+  - Generative AI
+  - LLM Applications
+  - Vector Databases
+  - NLP + RAG Systems
+currently_building:
+  - SwachhVan
+  - AI tools under Naxatra AI
+currently_learning:
+  - Advanced Machine Learning
+  - Deep Learning
+  - Production-grade AI Systems
+mission: Build useful AI products, not just demos.
+```
+
+* 🔭 Building **SwachhVan**, an AI-powered smart sanitation platform.
+* 🌱 Learning how to take AI systems from prototype to production.
+* 👯 Open to collaborating on impactful AI/ML and GenAI projects.
+* 💬 Ask me about **Python, LLMs, Vector Databases, RAG, and AI Apps**.
+* ⚡ I believe strong products are built through execution, not ideas alone.
+
+</td>
+<td width="40%">
+
+<img src="https://raw.githubusercontent.com/AVS1508/AVS1508/master/assets/Night-Coding.gif" width="100%" />
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🌟 Flagship Project — SwachhVan
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/AI%20Powered-00C853?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Real%20World%20Impact-2563EB?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Smart%20City%20Solution-7C3AED?style=for-the-badge" />
+
+</div>
+
+> SwachhVan is an AI-powered sanitation platform that predicts demand and intelligently deploys mobile washroom vans in cities.
+
+```text
+📍 Live location tracking
+🤖 AI-based demand forecasting
+📲 Smart booking and scheduling
+⭐ User feedback and cleanliness rating
+🌍 Designed to solve a real-world urban problem
+```
+
+<div align="center">
+
+<a href="https://swachhvan.vercel.app/">
+  <img src="https://img.shields.io/badge/Launch%20SwachhVan-111827?style=for-the-badge&logo=vercel&logoColor=white" />
 </a>
 
 </div>
 
 ---
 
-<img align="right" alt="coding" width="320" src="https://raw.githubusercontent.com/AVS1508/AVS1508/master/assets/Night-Coding.gif">
-
-### 👨‍💻 About Me
-
-* 🔭 I’m currently working on **[SwachhVan](https://swachhvan.vercel.app/)**
-* 🌱 I’m currently learning **Machine Learning, Generative AI, LLMs, and RAG Systems**
-* 👯 I’m looking to collaborate on **Naxatra AI** and AI-based projects
-* 💬 Ask me about **Gen AI, Python, Vector Databases, NLP, and AI Web Apps**
-* 📫 Reach me at **[tanmaykala171206@gmail.com](mailto:tanmaykala171206@gmail.com)**
-* 📄 Resume / Experience: [View Here](https://drive.google.com/file/d/1KCIHYZYRYBtJ7K4LejSmjeLNbeqxfWhA/view?usp=sharing)
-* ⚡ Fun fact: I don't just learn AI — I build with it.
-
-<br clear="both">
-
----
-
-### 🚀 Featured Project
-
-<h3>SwachhVan</h3>
-
-> An AI-powered sanitation platform designed to predict demand and deploy mobile washroom vans intelligently.
-
-* 📍 Real-time location tracking
-* 🤖 AI-based prediction system
-* 📲 Smart booking and scheduling
-* 🌍 Solving real-world urban problems
-
-<p>
-  <a href="https://swachhvan.vercel.app/">
-    <img src="https://img.shields.io/badge/Visit-SwachhVan-00C853?style=for-the-badge" />
-  </a>
-</p>
-
----
-
-### 🌐 Connect With Me
+## 🛠️ Tech Arsenal
 
 <div align="center">
 
-<a href="https://www.linkedin.com/in/tanmay-kala/" target="_blank">
-  <img src="https://skillicons.dev/icons?i=linkedin" alt="linkedin" width="55" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/tanmayai23" target="_blank">
-  <img src="https://skillicons.dev/icons?i=github" alt="github" width="55" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://www.instagram.com/tanmayekaala__/" target="_blank">
-  <img src="https://skillicons.dev/icons?i=instagram" alt="instagram" width="55" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://www.youtube.com/@techtalks-14" target="_blank">
-  <img src="https://img.icons8.com/color/96/youtube-play.png" alt="youtube" width="55" />
-</a>
+<img src="https://skillicons.dev/icons?i=python,cpp,java,javascript,typescript,react,nextjs,nodejs,express,mongodb,mysql,firebase,tailwind,tensorflow,pytorch,git,github,vscode,figma&perline=10" />
+
+<br><br>
+
+<img src="https://img.shields.io/badge/Generative%20AI-9333EA?style=for-the-badge&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/RAG%20Systems-16A34A?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Vector%20Databases-1F2937?style=for-the-badge" />
+<img src="https://img.shields.io/badge/NLP-0284C7?style=for-the-badge" />
+<img src="https://img.shields.io/badge/LLM%20Apps-F59E0B?style=for-the-badge" />
 
 </div>
 
 ---
 
-### 🛠️ Languages and Tools
+## 📊 GitHub Analytics
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=python,cpp,java,javascript,typescript,html,css" />
-<br><br>
-<img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,express,mongodb,mysql,firebase" />
-<br><br>
-<img src="https://skillicons.dev/icons?i=tensorflow,pytorch,opencv,git,github,vscode,figma" />
-
-<br><br>
-
-<img src="https://img.shields.io/badge/Generative%20AI-8A2BE2?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Vector%20Database-111827?style=for-the-badge" />
-<img src="https://img.shields.io/badge/NLP-0e75b6?style=for-the-badge" />
-<img src="https://img.shields.io/badge/RAG%20Systems-16a34a?style=for-the-badge" />
-
-</div>
-
----
-
-### 📊 GitHub Stats
-
-<div align="center">
-
-<img width="49%" src="https://github-readme-stats.vercel.app/api?username=tanmayai23&show_icons=true&theme=tokyonight&hide_border=true" />
+<img width="49%" src="https://github-readme-stats.vercel.app/api?username=tanmayai23&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github" />
 <img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=tanmayai23&theme=tokyonight&hide_border=true" />
 
 <br><br>
 
-<img width="42%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tanmayai23&layout=compact&theme=tokyonight&hide_border=true" />
+<img width="58%" src="https://github-readme-activity-graph.vercel.app/graph?username=tanmayai23&theme=tokyo-night&hide_border=true&area=true" />
+
+<br><br>
+
+<img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tanmayai23&layout=compact&theme=tokyonight&hide_border=true" />
 
 </div>
 
 ---
 
-### 🏆 GitHub Trophies
+## 🌐 Connect With Me
 
 <div align="center">
 
-<img src="https://github-profile-trophy.vercel.app/?username=tanmayai23&theme=algolia&row=1&column=7&margin-w=10&margin-h=10" alt="trophies" />
+<a href="https://www.linkedin.com/in/tanmay-kala/" target="_blank">
+  <img src="https://skillicons.dev/icons?i=linkedin" width="55" />
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/tanmayai23" target="_blank">
+  <img src="https://skillicons.dev/icons?i=github" width="55" />
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://www.instagram.com/tanmayekaala__/" target="_blank">
+  <img src="https://skillicons.dev/icons?i=instagram" width="55" />
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://www.youtube.com/@techtalks-14" target="_blank">
+  <img src="https://img.icons8.com/color/96/youtube-play.png" width="55" />
+</a>
 
-</div>
+<br><br>
 
----
+```text
+“Building AI that solves problems, not just impresses people.”
+```
 
-<div align="center">
-
-<img src="https://komarev.com/ghpvc/?username=tanmayai23&label=Profile%20Views&color=0e75b6&style=for-the-badge" alt="profile views" />
+<img src="https://komarev.com/ghpvc/?username=tanmayai23&label=Profile%20Views&color=2563EB&style=for-the-badge" />
 
 </div>
