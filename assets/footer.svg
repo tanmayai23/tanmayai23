@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="210" viewBox="0 0 1200 210" role="img" aria-label="Let&#x27;s build something real">
+<title>Let&#x27;s build something real</title>
+<style>
+  .sans { font-family: 'Segoe UI', Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace; }
+  .rise { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .fade { animation: fade .6s ease-out both; }
+  .blink { animation: blink 1.1s steps(1) infinite; }
+  .pulse { animation: pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .ping { animation: ping 2s cubic-bezier(0,0,.2,1) infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes pulse { 0%,100% { opacity: .45; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+  @keyframes ping { 0% { opacity: .7; transform: scale(1); } 80%,100% { opacity: 0; transform: scale(2.6); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+
+  .w1 { animation: wave 12s linear infinite; }
+  .w2 { animation: wave 18s linear infinite reverse; }
+  @keyframes wave { from { transform: translateX(0); } to { transform: translateX(-1200px); } }
+</style>
+<defs><linearGradient id="wv" x1="0" x2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset=".5" stop-color="#38BDF8"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#070B14"/><stop offset="1" stop-color="#0A1528"/></linearGradient>
+<clipPath id="c"><rect width="1200" height="210" rx="22"/></clipPath></defs>
+
+<g clip-path="url(#c)">
+  <rect width="1200" height="210" fill="url(#bg)"/>
+  <path d="M0 168 Q100 154 200 168 T400 168 Q500 154 600 168 T800 168 Q900 154 1000 168 T1200 168 Q1300 154 1400 168 T1600 168 Q1700 154 1800 168 T2000 168 Q2100 154 2200 168 T2400 168 V210 H0 Z" fill="url(#wv)" fill-opacity=".14" class="w1"/>
+  <path d="M0 180 Q100 170 200 180 T400 180 Q500 170 600 180 T800 180 Q900 170 1000 180 T1200 180 Q1300 170 1400 180 T1600 180 Q1700 170 1800 180 T2000 180 Q2100 170 2200 180 T2400 180 V210 H0 Z" fill="url(#wv)" fill-opacity=".22" class="w2"/>
+</g>
+<rect x=".75" y=".75" width="1198.5" height="208.5" rx="21.5" fill="none" stroke="#1C2638" stroke-width="1.5"/>
+<g class="rise">
+  <text x="600.0" y="66" text-anchor="middle" class="mono" font-size="14" fill="#5EEAD4">$ git commit -m "let's build something real"</text>
+  <text x="600.0" y="112" text-anchor="middle" class="sans" font-size="34" font-weight="800" letter-spacing="-.5" fill="#E6EDF3">Got a hard problem? Let’s ship the AI for it.</text>
+</g>
+<g class="rise" style="animation-delay:0.30s">
+  <text x="600.0" y="146" text-anchor="middle" class="mono" font-size="13.5" fill="#7D8AA0">tanmaykala171206@gmail.com  ·  linkedin.com/in/tanmay-kala  ·  github.com/tanmayai23</text>
+</g>
+
+</svg>
