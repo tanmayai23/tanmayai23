@@ -1,275 +1,121 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=180&color=0:07111F,40:0B1F3A,70:123B6B,100:1D8B73&text=Tanmay%20Kala&fontSize=44&fontColor=FFFFFF&fontAlignY=38&desc=AI/ML%20Engineer%20•%20Generative%20AI%20Builder%20•%20Founder%20@%20Naxatra%20AI&descAlignY=62&descSize=18&animation=fadeIn" />
+<img src="./assets/hero.svg" width="100%" alt="Tanmay Kala — Generative AI & NLP Engineer, Founder @ Naxatra AI" />
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=22&pause=1400&color=5EEAD4&center=true&vCenter=true&width=780&height=40&lines=Building+AI+Products+for+Real+Problems;Generative+AI+%7C+LLMs+%7C+RAG+Systems;Turning+Ideas+into+Scalable+AI+Applications" alt="Typing SVG" />
+<br />
 
-<a href="https://github.com/tanmayai23">
-  <img src="https://img.shields.io/github/followers/tanmayai23?label=Followers&style=for-the-badge&color=123B6B&labelColor=07111F" />
-</a>
-<a href="https://www.linkedin.com/in/tanmay-kala/">
-  <img src="https://img.shields.io/badge/LinkedIn-Tanmay%20Kala-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
-</a>
-<a href="mailto:tanmaykala171206@gmail.com">
-  <img src="https://img.shields.io/badge/Email-Contact%20Me-166534?style=for-the-badge&logo=gmail&logoColor=white" />
-</a>
-
-<br><br>
-
-<img src="https://github-profile-trophy.vercel.app/?username=tanmayai23&theme=algolia&no-frame=true&no-bg=true&margin-w=12&margin-h=12&column=3&rank=SECRET,SSS,SS,S,AAA,AA,A,B" alt="GitHub Trophies" width="78%" />
-
-<br>
-
-<img src="https://img.shields.io/badge/Top%2025%20Finalist-SwachhVan%20%7C%20400%2B%20Teams-2563EB?style=for-the-badge" />
-<img src="https://img.shields.io/badge/OCI%20Certified-Generative%20AI%20Professional-16A34A?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Build%20in%20Public-21%2B%20LinkedIn%20Posts-7C3AED?style=for-the-badge" />
+<a href="https://portfolio-five-topaz-l2jyqjtlet.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0C1220?style=for-the-badge&logo=vercel&logoColor=5EEAD4" alt="Portfolio" /></a>
+<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/LinkedIn-0C1220?style=for-the-badge&logo=linkedin&logoColor=38BDF8" alt="LinkedIn" /></a>
+<a href="mailto:tanmaykala171206@gmail.com"><img src="https://img.shields.io/badge/Email-0C1220?style=for-the-badge&logo=gmail&logoColor=F472B6" alt="Email" /></a>
+<a href="https://swachhvan.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-SwachhVan-0C1220?style=for-the-badge&logo=googlemaps&logoColor=4ADE80&labelColor=0C1220&color=14532D" alt="SwachhVan live demo" /></a>
+<img src="https://img.shields.io/badge/OCI-GenAI%20Professional-0C1220?style=for-the-badge&logo=oracle&logoColor=FBBF24&labelColor=0C1220&color=78350F" alt="OCI Generative AI Professional" />
 
 </div>
 
-<div align="center">
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=14&color=0:07111F,30:0B1F3A,65:123B6B,100:1D8B73&section=header" />
-</div>
+<br />
 
-<table>
-<tr>
-<td width="60%">
+<img src="./assets/h-about.svg" width="100%" alt="01 About" />
 
-## 🚀 About Me
+<img src="./assets/about.svg" width="100%" alt="cat about.json — Tanmay Kala, Generative AI & NLP Engineer, B.Tech CSE (AI & ML) VIT Bhopal '28, Founder of Naxatra AI" />
 
-```yaml
-name: Tanmay Kala
-role: AI/ML Engineer & Founder of Naxatra AI
-specialization:
-  - Generative AI
-  - LLM Applications
-  - Vector Databases
-  - NLP + RAG Systems
-currently_building:
-  - SwachhVan
-  - AI tools under Naxatra AI
-currently_learning:
-  - Advanced Machine Learning
-  - Deep Learning
-  - Production-grade AI Systems
-mission: Build useful AI products, not just demos.
-```
+<br /><br />
 
-* 🔭 Building **SwachhVan**, an AI-powered smart sanitation platform.
-* 🌱 Learning how to take AI systems from prototype to production.
-* 👯 Open to collaborating on impactful AI/ML and GenAI projects.
-* 💬 Ask me about **Python, LLMs, Vector Databases, RAG, and AI Apps**.
-* ⚡ I believe strong products are built through execution, not ideas alone.
+<img src="./assets/h-impact.svg" width="100%" alt="02 Impact" />
 
-</td>
-<td width="40%">
+<img src="./assets/impact.svg" width="100%" alt="5+ AI products shipped · Top 25 of 400+ teams · 96.82% test accuracy · 421 tests passing · under 500ms hotword latency · 50+ languages" />
 
-<img src="https://raw.githubusercontent.com/AVS1508/AVS1508/master/assets/Night-Coding.gif" width="100%" />
+<br /><br />
 
-</td>
-</tr>
-</table>
-
-<div align="center">
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=10&color=0:07111F,50:123B6B,100:1D8B73" />
-</div>
-
-## 🌟 Flagship Project — SwachhVan
+<img src="./assets/h-work.svg" width="100%" alt="03 Featured Work" />
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/AI%20Powered-00C853?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Real%20World%20Impact-2563EB?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Smart%20City%20Solution-7C3AED?style=for-the-badge" />
+<a href="https://swachhvan.vercel.app/"><img src="./assets/card-swachhvan.svg" width="49%" alt="SwachhVan — AI smart sanitation platform" /></a>
+<a href="https://github.com/tanmayai23/Hey-Dude-Voice-Assistant"><img src="./assets/card-heydude.svg" width="49%" alt="Hey Dude — AI voice assistant" /></a>
+<a href="https://github.com/tanmayai23/CALL-E-Hackathon"><img src="./assets/card-marketbuddy.svg" width="49%" alt="Market Buddy — autonomous voice agent" /></a>
+<a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition"><img src="./assets/card-gtsrb.svg" width="49%" alt="TrafficSignNet — 43-class CNN, 96.82% accuracy" /></a>
+<a href="https://aitravelassist.vercel.app"><img src="./assets/card-travel.svg" width="49%" alt="AI Travel Assist" /></a>
+<a href="https://whisper-ai-transcription.vercel.app"><img src="./assets/card-whisper.svg" width="49%" alt="Whisper AI Transcription" /></a>
+
+<sub>
+<b>Live:</b>
+<a href="https://swachhvan.vercel.app/">SwachhVan</a> ·
+<a href="https://hey-dude-voice-assistant.vercel.app">Hey Dude</a> ·
+<a href="https://aitravelassist.vercel.app">Travel Assist</a> ·
+<a href="https://whisper-ai-transcription.vercel.app">Whisper</a> ·
+<a href="https://vibehub-liard.vercel.app">VibeHub</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<b>Code:</b>
+<a href="https://github.com/tanmayai23/Hey-Dude-Voice-Assistant">Hey Dude</a> ·
+<a href="https://github.com/tanmayai23/CALL-E-Hackathon">Market Buddy</a> ·
+<a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition">TrafficSignNet</a> ·
+<a href="https://github.com/tanmayai23/AI-Travel-Assist">Travel Assist</a> ·
+<a href="https://github.com/tanmayai23/Whisper_AI_Transcription">Whisper</a>
+</sub>
 
 </div>
 
-> SwachhVan is an AI-powered sanitation platform that predicts demand and intelligently deploys mobile washroom vans in cities.
+<br />
 
-```text
-📍 Live location tracking
-🤖 AI-based demand forecasting
-📲 Smart booking and scheduling
-⭐ User feedback and cleanliness rating
-🌍 Designed to solve a real-world urban problem
-```
+<img src="./assets/h-lab.svg" width="100%" alt="04 Also in the Lab" />
+
+| Project | What it does | Built with |
+| :-- | :-- | :-- |
+| [**VibeHub**](https://github.com/tanmayai23/vibehub-campus-connect) · [live](https://vibehub-liard.vercel.app) | Student super-app (courses, attendance, mood, community) with an NLP chatbot that handles 100+ query types. Placed at Summer of Codefest '25 | TypeScript · NLP |
+| [**Customer Churn ML**](https://github.com/tanmayai23/customer-churn-ml-api-explainability) | End-to-end churn classifier: preprocessing, cross-validation, LogReg vs Random Forest, ROC-AUC | scikit-learn · pandas |
+| [**Fairness & Explainability**](https://github.com/tanmayai23/Fairness-Bias-Explainability) | SHAP global/local explanations, group fairness metrics, bias-gap analysis and mitigation plan | SHAP · Jupyter |
+| [**API Docker Deployment**](https://github.com/tanmayai23/API-Docker-Deployment) | Packaging ML models as containerised, production-style APIs | Python · Docker |
+| [**NEXUS Calculator**](https://github.com/tanmayai23/NEXUS-CALCULATOR) | Advanced math problem solver | TypeScript |
+| [**Machine Learning Projects**](https://github.com/tanmayai23/Machine-Learning-Projects) | Collection of classic ML experiments | Python |
+
+<br />
+
+<img src="./assets/h-stack.svg" width="100%" alt="05 Tech Stack" />
 
 <div align="center">
-
-<a href="https://swachhvan.vercel.app/">
-  <img src="https://img.shields.io/badge/Launch%20SwachhVan-111827?style=for-the-badge&logo=vercel&logoColor=white" />
-</a>
-
+<br />
+<img src="https://skillicons.dev/icons?i=py,ts,js,cpp,c,pytorch,tensorflow,sklearn,opencv,fastapi,flask,docker,aws,gcp,vercel,mysql,sqlite,git&perline=18&theme=dark" alt="Python, TypeScript, JavaScript, C++, C, PyTorch, TensorFlow, scikit-learn, OpenCV, FastAPI, Flask, Docker, AWS, GCP, Vercel, MySQL, SQLite, Git" />
+<br /><br />
 </div>
+
+<img src="./assets/stack.svg" width="100%" alt="GenAI & LLMs, ML & Deep Learning, Speech & Vision, Ship & Scale" />
+
+<br /><br />
+
+<img src="./assets/h-journey.svg" width="100%" alt="06 Build Journey" />
+
+<img src="./assets/journey.svg" width="100%" alt="Sep 2024 VIT Bhopal → Jan 2025 Whisper → Feb 2025 SwachhVan Top 25 → Jun 2025 VibeHub → Oct 2025 OCI GenAI Professional → Nov 2025 Hey Dude → 2026 agents and production ML" />
+
+<br /><br />
+
+<img src="./assets/h-github.svg" width="100%" alt="07 GitHub Activity" />
 
 <div align="center">
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=10&color=0:07111F,50:123B6B,100:1D8B73" />
+<br />
+<img src="https://github-readme-stats.vercel.app/api?username=tanmayai23&show_icons=true&include_all_commits=true&hide_border=true&bg_color=0C1220&title_color=5EEAD4&icon_color=38BDF8&text_color=C3CEDC&ring_color=5EEAD4&rank_icon=github&card_width=460" height="180" alt="GitHub stats" />
+<img src="https://streak-stats.demolab.com/?user=tanmayai23&hide_border=true&background=0C1220&stroke=1C2638&ring=5EEAD4&fire=FBBF24&currStreakNum=E6EDF3&sideNums=E6EDF3&currStreakLabel=5EEAD4&sideLabels=7D8AA0&dates=7D8AA0&card_width=460" height="180" alt="GitHub streak" />
+<br />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=tanmayai23&layout=compact&hide_border=true&bg_color=0C1220&title_color=5EEAD4&text_color=C3CEDC&langs_count=8&card_width=460" height="150" alt="Top languages" />
+<br /><br />
+<img src="https://ghchart.rshah.org/14B8A6/tanmayai23" width="92%" alt="Contribution chart" />
+<br /><br />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tanmayai23/tanmayai23/output/snake-dark.svg" />
+  <img src="https://raw.githubusercontent.com/tanmayai23/tanmayai23/output/snake.svg" width="92%" alt="Snake eating my contributions" />
+</picture>
 </div>
 
-## 🛠️ Tech Arsenal
+<br />
 
-```text
-❯ stack --profile tanmay
-```
-
-<table align="center">
-<tr>
-<td align="center" width="25%">
-
-### Languages
-
-<img src="https://skillicons.dev/icons?i=python,cpp,c,js,html,css&perline=3" />
-
-<br>
-
-<img src="https://img.shields.io/badge/SQL-0F172A?style=flat-square&logo=mysql&logoColor=white" />
-
-</td>
-<td align="center" width="25%">
-
-### AI / GenAI
-
-<img src="https://skillicons.dev/icons?i=tensorflow&perline=3" />
-
-<br><br>
-
-<img src="https://img.shields.io/badge/Hugging%20Face-FFB000?style=flat-square&logo=huggingface&logoColor=black" />
-<img src="https://img.shields.io/badge/Transformers-111827?style=flat-square" />
-<img src="https://img.shields.io/badge/OpenAI%20API-412991?style=flat-square&logo=openai" />
-<img src="https://img.shields.io/badge/Gemini%20API-4285F4?style=flat-square&logo=google" />
-<img src="https://img.shields.io/badge/RAG-16A34A?style=flat-square" />
-<img src="https://img.shields.io/badge/Prompt%20Engineering-EA580C?style=flat-square" />
-<img src="https://img.shields.io/badge/LLM%20Fine--Tuning-9333EA?style=flat-square" />
-<img src="https://img.shields.io/badge/NLP-0284C7?style=flat-square" />
-
-</td>
-<td align="center" width="25%">
-
-### Speech / Voice AI
-
-<img src="https://img.shields.io/badge/Whisper%20AI-111827?style=flat-square" />
-<img src="https://img.shields.io/badge/Speech%20Recognition-2563EB?style=flat-square" />
-<img src="https://img.shields.io/badge/pyttsx3-16A34A?style=flat-square" />
-<img src="https://img.shields.io/badge/Snowboy-E11D48?style=flat-square" />
-<img src="https://img.shields.io/badge/Porcupine-F59E0B?style=flat-square" />
-<img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv" />
-
-</td>
-<td align="center" width="25%">
-
-### Tools & Platforms
-
-<img src="https://skillicons.dev/icons?i=git,github,vscode,flask,mysql,sqlite,firebase&perline=3" />
-
-<br><br>
-
-<img src="https://img.shields.io/badge/Gradio-FF6B00?style=flat-square" />
-<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" />
-<img src="https://img.shields.io/badge/REST%20API-0F172A?style=flat-square" />
-<img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black" />
-<img src="https://img.shields.io/badge/OCI-C74634?style=flat-square&logo=oracle" />
-<img src="https://img.shields.io/badge/AWS%20Foundations-232F3E?style=flat-square&logo=amazonaws" />
-
-</td>
-</tr>
-</table>
+<img src="./assets/footer.svg" width="100%" alt="Got a hard problem? Let's ship the AI for it." />
 
 <div align="center">
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=10&color=0:07111F,50:123B6B,100:1D8B73" />
+<br />
+<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://skillicons.dev/icons?i=linkedin" width="44" alt="LinkedIn" /></a>&nbsp;&nbsp;
+<a href="https://github.com/tanmayai23"><img src="https://skillicons.dev/icons?i=github" width="44" alt="GitHub" /></a>&nbsp;&nbsp;
+<a href="mailto:tanmaykala171206@gmail.com"><img src="https://skillicons.dev/icons?i=gmail" width="44" alt="Email" /></a>&nbsp;&nbsp;
+<a href="https://www.instagram.com/tanmayekaala__/"><img src="https://skillicons.dev/icons?i=instagram" width="44" alt="Instagram" /></a>&nbsp;&nbsp;
+<a href="https://www.youtube.com/@techtalks-14"><img src="https://img.icons8.com/color/96/youtube-play.png" width="44" alt="YouTube" /></a>
+<br /><br />
+<img src="https://komarev.com/ghpvc/?username=tanmayai23&label=PROFILE%20VIEWS&color=0F766E&style=flat-square" alt="Profile views" />
 </div>
-
-## 📊 GitHub Analytics
-
-```text
-❯ git log --graph --stats
-```
-
-<div align="center">
-
-<table>
-<tr>
-<td width="50%">
-<img width="100%" src="https://github-readme-stats.vercel.app/api?username=tanmayai23&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=5EEAD4&icon_color=38BDF8&text_color=C9D1D9&ring_color=14B8A6&rank_icon=github" />
-</td>
-<td width="50%">
-<img width="100%" src="https://github-readme-streak-stats.herokuapp.com/?user=tanmayai23&theme=tokyonight&hide_border=true&background=0D1117&stroke=14B8A6&ring=38BDF8&fire=5EEAD4&currStreakLabel=C9D1D9" />
-</td>
-</tr>
-</table>
-
-<br>
-
-<img width="92%" src="https://github-readme-activity-graph.vercel.app/graph?username=tanmayai23&custom_title=Tanmay%20Kala's%20Contribution%20Graph&bg_color=0D1117&color=5EEAD4&line=38BDF8&point=FFFFFF&area=true&hide_border=true" />
-
-<br><br>
-
-<table>
-<tr>
-<td width="48%">
-<img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tanmayai23&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=5EEAD4&text_color=C9D1D9" />
-</td>
-<td width="52%">
-
-```yaml
-profile_metrics:
-  focus: AI / ML + Generative AI
-  strongest_languages:
-    - Python
-    - JavaScript
-    - TypeScript
-  current_goal: Build production-grade AI products
-  active_projects:
-    - SwachhVan
-    - Naxatra AI
-```
-
-</td>
-</tr>
-</table>
-
-</div>
-
-<div align="center">
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=10&color=0:07111F,50:123B6B,100:1D8B73" />
-</div>
-
-## 📡 Ping Socials
-
-<div align="center">
-
-```text
-┌──────────────────────────────────────────────┐
-│   Let's connect and build something real.   │
-└──────────────────────────────────────────────┘
-```
-
-<a href="https://www.linkedin.com/in/tanmay-kala/" target="_blank">
-  <img src="https://skillicons.dev/icons?i=linkedin" width="58" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/tanmayai23" target="_blank">
-  <img src="https://skillicons.dev/icons?i=github" width="58" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="mailto:tanmaykala171206@gmail.com" target="_blank">
-  <img src="https://img.icons8.com/color/96/gmail-new.png" width="58" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://www.instagram.com/tanmayekaala__/" target="_blank">
-  <img src="https://skillicons.dev/icons?i=instagram" width="58" />
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://www.youtube.com/@techtalks-14" target="_blank">
-  <img src="https://img.icons8.com/color/96/youtube-play.png" width="58" />
-</a>
-
-<br><br>
-
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=16&pause=1000&color=5EEAD4&center=true&vCenter=true&width=700&height=28&lines=AI+Engineer+%7C+Builder+%7C+Open+to+Collaboration;Let's+build+the+future+with+AI+and+real+products" />
-
-<br><br>
-
-<img src="https://komarev.com/ghpvc/?username=tanmayai23&label=Profile%20Views&color=2563EB&style=for-the-badge" />
-
-</div>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:07111F,35:0B1F3A,70:123B6B,100:1D8B73" />
