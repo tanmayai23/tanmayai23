@@ -1,13 +1,12 @@
-"""Generates the theme-aware animated SVGs used by the profile README.
+"""Generates the "TanmayGPT" chat-style profile README assets.
 
-Every asset is written twice (name-dark.svg / name-light.svg) and the README
-picks one with <picture> + prefers-color-scheme, which follows the viewer's
-GitHub theme.
+Every asset is written twice (name-dark.svg / name-light.svg); the README picks
+one with <picture> + prefers-color-scheme, which follows the viewer's GitHub theme.
 
 Run:  python tools/build_assets.py
+Edit CHAT_TOP / CHAT_END / PROJECTS below and re-run.
 """
 import base64
-import math
 from html import escape
 from pathlib import Path
 
@@ -17,10 +16,12 @@ OUT.mkdir(exist_ok=True)
 
 DARK = dict(bg="#0D1117", card="#161B22", line="#30363D", text="#E6EDF3", soft="#C9D1D9",
             muted="#8B949E", teal="#2DD4BF", cyan="#38BDF8", violet="#A78BFA", amber="#FBBF24",
-            pink="#F472B6", green="#3FB950", glow=".20", chip=".10")
+            pink="#F472B6", green="#3FB950", glow=".18", chip=".10",
+            u1="#2DD4BF", u2="#38BDF8", utext="#04221F")
 LIGHT = dict(bg="#FFFFFF", card="#F6F8FA", line="#D0D7DE", text="#1F2328", soft="#31373D",
              muted="#59636E", teal="#0F766E", cyan="#0369A1", violet="#6D28D9", amber="#B45309",
-             pink="#BE185D", green="#1A7F37", glow=".10", chip=".07")
+             pink="#BE185D", green="#1A7F37", glow=".09", chip=".07",
+             u1="#0F766E", u2="#0369A1", utext="#FFFFFF")
 
 SANS = "'Segoe UI', Inter, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
 MONO = "'JetBrains Mono', 'Cascadia Code', SFMono-Regular, Consolas, 'Courier New', monospace"
@@ -28,270 +29,249 @@ MONO = "'JetBrains Mono', 'Cascadia Code', SFMono-Regular, Consolas, 'Courier Ne
 BASE_CSS = f"""
   .sans {{ font-family: {SANS}; }}
   .mono {{ font-family: {MONO}; }}
-  .rise {{ animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }}
+  .pop {{ animation: pop .45s cubic-bezier(.2,.8,.2,1.2) both; transform-box: fill-box; }}
+  .popL {{ transform-origin: left bottom; }}
+  .popR {{ transform-origin: right bottom; }}
+  .typing {{ opacity: 0; animation: show .7s linear both; animation-fill-mode: none; }}
+  .dot {{ animation: bounce 1s ease-in-out infinite; }}
   .blink {{ animation: blink 1.1s steps(1) infinite; }}
   .ping {{ animation: ping 2s cubic-bezier(0,0,.2,1) infinite; transform-box: fill-box; transform-origin: center; }}
-  @keyframes rise {{ from {{ opacity: 0; transform: translateY(16px); }} to {{ opacity: 1; transform: none; }} }}
+  @keyframes pop {{ from {{ opacity: 0; transform: translateY(12px) scale(.94); }} to {{ opacity: 1; transform: none; }} }}
+  @keyframes show {{ 0%,100% {{ opacity: 1; }} }}
+  @keyframes bounce {{ 0%,60%,100% {{ transform: translateY(0); opacity: .45; }} 30% {{ transform: translateY(-5px); opacity: 1; }} }}
   @keyframes blink {{ 50% {{ opacity: 0; }} }}
-  @keyframes ping {{ 0% {{ opacity: .8; transform: scale(1); }} 80%,100% {{ opacity: 0; transform: scale(2.8); }} }}
-  @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
+  @keyframes ping {{ 0% {{ opacity: .8; transform: scale(1); }} 80%,100% {{ opacity: 0; transform: scale(2.6); }} }}
+  @media (prefers-reduced-motion: reduce) {{ .pop, .dot, .blink, .ping {{ animation: none !important; }} }}
 """
+
+PHOTO = base64.b64encode((ROOT / "avatar.jpg").read_bytes()).decode()
+W, PAD, FS, LH = 1000, 36, 19, 30   # canvas width, side padding, message font size, line height
 
 
 def e(s):
     return escape(str(s), quote=True)
 
 
-def d(s):
+def dl(s):
     return f' style="animation-delay:{s:.2f}s"'
+
+
+def sans_w(text, size):
+    return len(text) * size * 0.53
 
 
 def mono_w(text, size):
     return len(text) * size * 0.6
 
 
-def svg(w, h, body, css="", defs="", label=""):
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-            f'role="img" aria-label="{e(label)}">\n<title>{e(label)}</title>\n'
-            f'<style>{BASE_CSS}{css}</style>\n<defs>{defs}</defs>\n{body}\n</svg>\n')
+def bubble(x, y, w, h, r=20, tl=None, br=None, **attrs):
+    """Rounded rect path with optional tighter top-left / bottom-right corner (chat tail)."""
+    tl = r if tl is None else tl
+    br = r if br is None else br
+    a = " ".join(f'{k.replace("_", "-")}="{v}"' for k, v in attrs.items())
+    return (f'<path d="M{x+tl},{y} H{x+w-r} Q{x+w},{y} {x+w},{y+r} V{y+h-br} Q{x+w},{y+h} {x+w-br},{y+h} '
+            f'H{x+r} Q{x},{y+h} {x},{y+h-r} V{y+tl} Q{x},{y} {x+tl},{y} Z" {a}/>')
 
 
-def write(name, content):
-    (OUT / name).write_text(content, encoding="utf-8")
-    print(f"  assets/{name}")
+def avatar_defs():
+    return (f'<clipPath id="avc"><circle cx="20" cy="20" r="20"/></clipPath>'
+            f'<symbol id="av" viewBox="0 0 40 40" overflow="visible"><image width="40" height="40" '
+            f'href="data:image/jpeg;base64,{PHOTO}" clip-path="url(#avc)"/></symbol>')
 
 
-def chip(T, x, y, text, color, size=12.5, h=28):
-    w = mono_w(text, size) + 24
-    return (f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="{h}" rx="{h/2}" fill="{color}" '
-            f'fill-opacity="{T["chip"]}" stroke="{color}" stroke-opacity=".35"/>'
-            f'<text x="{x + w/2:.1f}" y="{y + h/2 + size*.36:.1f}" text-anchor="middle" class="mono" '
-            f'font-size="{size}" font-weight="600" fill="{color}">{e(text)}</text>'), w
+def photo(x, y, size):
+    return f'<use href="#av" x="{x}" y="{y}" width="{size}" height="{size}"/>'
 
 
-def label(T, x, y, text, color):
-    return (f'<circle cx="{x+4}" cy="{y-4}" r="4" fill="{color}"/>'
-            f'<text x="{x+16}" y="{y}" class="mono" font-size="12" font-weight="600" letter-spacing="2.2" '
-            f'fill="{T["muted"]}">{e(text)}</text>')
+# ----------------------------------------------------------------- content
+CHAT_TOP = [
+    ("user", "Who is Tanmay?"),
+    ("ai", "text", [
+        [("Tanmay Kala", "text", True), (" — Generative AI & NLP engineer", "soft", False)],
+        [("and founder of ", "soft", False), ("Naxatra AI", "teal", True), (".", "soft", False)],
+        [("B.Tech CSE (AI & ML) @ VIT Bhopal, class of '28.", "soft", False)],
+        [("He doesn't stop at demos. He ships AI products.", "text", True)],
+    ]),
+    ("user", "Impressive. Any proof?"),
+    ("ai", "stats", "Here are the receipts:", [
+        ("5+", "AI products live", "teal"), ("Top 25", "of 400+ teams", "cyan"),
+        ("96.82%", "CNN accuracy", "pink"), ("421", "tests passing", "amber"),
+    ]),
+    ("user", "What is he working on right now?"),
+    ("ai", "text", [
+        [("▸ ", "teal", True), ("Building Naxatra AI", "text", True), (" — AI for civic problems", "soft", False)],
+        [("▸ ", "violet", True), ("Voice agents", "text", True), (" with LangGraph + CALL-E", "soft", False)],
+        [("▸ ", "amber", True), ("Freshly certified:", "text", True), (" OCI Generative AI Pro", "soft", False)],
+    ]),
+    ("user", "Show me his best work."),
+    ("ai", "text", [[("Tap any card below ", "soft", False), ("↓", "teal", True)]]),
+]
+
+CHAT_END = [
+    ("user", "Okay, I'm convinced. How do we hire him?"),
+    ("ai", "text", [
+        [("He's ", "soft", False), ("open to AI/ML & GenAI internships", "green", True), (".", "soft", False)],
+        [("LinkedIn, email and portfolio are right below. Say hi!", "soft", False)],
+    ]),
+]
 
 
-def tile(T, x, y, w, h, inner, delay=0.0):
-    return (f'<g class="rise"{d(delay)}><rect x="{x+.5}" y="{y+.5}" width="{w-1}" height="{h-1}" rx="20" '
-            f'fill="{T["card"]}" stroke="{T["line"]}"/>{inner}</g>')
+# ------------------------------------------------------------------ chat
+def chat(T, msgs, header, composer, start=.3):
+    items, defs_extra = [], []
+    y = (72 + 30) if header else 30
+    t = start
+    clip_n = 0
+    TYPE, LINE_T = .75, .42
 
+    for m in msgs:
+        if m[0] == "user":
+            text = m[1]
+            w = sans_w(text, FS) + 44
+            h = 50
+            x = W - PAD - w
+            items.append(f'<g class="pop popR"{dl(t)}>'
+                         + bubble(x, y, w, h, br=6, fill="url(#ub)")
+                         + f'<text x="{x+22}" y="{y+32}" class="sans" font-size="{FS}" font-weight="600" fill="{T["utext"]}">{e(text)}</text></g>')
+            y += h + 18
+            t += .55
+            continue
 
-# ================================================================== HERO
-PHOTO = base64.b64encode((ROOT / "avatar.jpg").read_bytes()).decode()
-WORDS = ["AI products that ship.", "voice assistants.", "RAG systems.", "vision models.", "an AI startup."]
+        bx = PAD + 54
+        # typing indicator, then avatar stays
+        items.append(f'<g class="pop popL"{dl(t)}>{photo(PAD, y + 2, 40)}</g>')
+        items.append(f'<g class="typing" style="animation-delay:{t:.2f}s;animation-duration:{TYPE}s">'
+                     + bubble(bx, y, 76, 46, tl=6, fill=T["card"], stroke=T["line"])
+                     + "".join(f'<circle cx="{bx+22+i*16}" cy="{y+23}" r="4.5" fill="{T["muted"]}" class="dot" style="animation-delay:{i*.15:.2f}s"/>' for i in range(3))
+                     + '</g>')
+        t += TYPE
 
+        if m[1] == "text":
+            lines = m[2]
+            lw = max(sum(sans_w(s, FS) for s, _, _ in ln) for ln in lines)
+            w, h = lw + 48, len(lines) * LH + 26
+            body = [bubble(bx, y, w, h, tl=6, fill=T["card"], stroke=T["line"])]
+            for i, ln in enumerate(lines):
+                clip_n += 1
+                ly = y + 13 + (i + 1) * LH - 8
+                full = sum(sans_w(s, FS) for s, _, _ in ln) + 30
+                defs_extra.append(f'<clipPath id="tw{clip_n}"><rect x="{bx+16}" y="{ly-FS-2}" width="0" height="{FS+10}">'
+                                  f'<animate attributeName="width" from="0" to="{full:.0f}" begin="{t + i*LINE_T:.2f}s" '
+                                  f'dur="{LINE_T:.2f}s" fill="freeze"/></rect></clipPath>')
+                spans = "".join(f'<tspan fill="{T[c]}"{" font-weight=\"700\"" if b else ""}>{e(s)}</tspan>' for s, c, b in ln)
+                body.append(f'<text x="{bx+24}" y="{ly}" class="sans" font-size="{FS}" xml:space="preserve" clip-path="url(#tw{clip_n})">{spans}</text>')
+            items.append(f'<g class="pop popL"{dl(t)}>{"".join(body)}</g>')
+            t += len(lines) * LINE_T
+        else:  # stats
+            intro, stats = m[2], m[3]
+            tw, gap = 172, 12
+            w = 24 * 2 + len(stats) * tw + (len(stats) - 1) * gap
+            h = 64 + 104
+            body = [bubble(bx, y, w, h, tl=6, fill=T["card"], stroke=T["line"]),
+                    f'<text x="{bx+24}" y="{y+40}" class="sans" font-size="{FS}" fill="{T["soft"]}">{e(intro)}</text>']
+            items.append(f'<g class="pop popL"{dl(t)}>{"".join(body)}</g>')
+            for i, (val, lab, c) in enumerate(stats):
+                tx = bx + 24 + i * (tw + gap)
+                items.append(f'<g class="pop popL"{dl(t + .25 + i*.18)}>'
+                             f'<rect x="{tx}" y="{y+60}" width="{tw}" height="88" rx="14" fill="{T[c]}" fill-opacity="{T["chip"]}" stroke="{T[c]}" stroke-opacity=".35"/>'
+                             f'<text x="{tx+16}" y="{y+100}" class="sans" font-size="30" font-weight="800" letter-spacing="-1" fill="{T[c]}">{e(val)}</text>'
+                             f'<text x="{tx+16}" y="{y+128}" class="sans" font-size="14.5" fill="{T["soft"]}">{e(lab)}</text></g>')
+            t += .25 + len(stats) * .18
+        y += h + 24
+        t += .45
 
-def hero(T):
-    W, H = 1200, 400
-    PX, PY, PR = 1000, 200, 118
-    n = len(WORDS)
-    cyc = 2.4
-    words = "".join(
-        f'<text x="186" y="246" class="sans w w{i}" font-size="36" font-weight="800" letter-spacing="-.5" '
-        f'fill="url(#acc)"{d(i*cyc)}>{e(wd)}</text>' for i, wd in enumerate(WORDS))
-    seg = 100 / n
+    if composer:
+        y += 4
+        items.append(f'<g class="pop"{dl(t)}>'
+                     f'<rect x="{PAD}" y="{y}" width="{W-2*PAD}" height="58" rx="29" fill="{T["card"]}" stroke="{T["line"]}"/>'
+                     f'<text x="{PAD+28}" y="{y+36}" class="sans" font-size="17" fill="{T["muted"]}">Ask TanmayGPT anything<tspan class="blink" fill="{T["teal"]}"> |</tspan></text>'
+                     f'<circle cx="{W-PAD-29}" cy="{y+29}" r="20" fill="url(#ub)"/>'
+                     f'<path d="M{W-PAD-36},{y+30} L{W-PAD-29},{y+22} L{W-PAD-22},{y+30} M{W-PAD-29},{y+22} V{y+37}" stroke="{T["utext"]}" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'
+                     f'</g>')
+        y += 58
 
-    def orbit(r, dots, cls, dash):
-        pts = "".join(f'<circle cx="{PX + r*math.cos(math.radians(a)):.1f}" cy="{PY + r*math.sin(math.radians(a)):.1f}" '
-                      f'r="{s}" fill="{T[c]}"/>' for a, c, s in dots)
-        return (f'<g class="{cls}"><circle cx="{PX}" cy="{PY}" r="{r}" fill="none" stroke="{T["muted"]}" '
-                f'stroke-opacity=".35" stroke-dasharray="{dash}"/>{pts}</g>')
-
-    chips, cx = [], 64
-    for t, c in [("LLMs", "teal"), ("RAG", "cyan"), ("Voice AI", "violet"), ("Computer Vision", "pink"), ("Agents", "amber")]:
-        s, w = chip(T, cx, 312, t, T[c], size=12.5, h=30)
-        chips.append(s)
-        cx += w + 10
-
-    css = f"""
-  .w {{ opacity: 0; animation: cyc {n*cyc}s ease-in-out infinite; }}
-  @keyframes cyc {{ 0% {{ opacity: 0; transform: translateY(14px); }} {seg*.12:.1f}%, {seg*.85:.1f}% {{ opacity: 1; transform: none; }}
-                   {seg:.1f}%, 100% {{ opacity: 0; transform: translateY(-14px); }} }}
-  .spinR {{ animation: spin 40s linear infinite; transform-box: view-box; transform-origin: {PX}px {PY}px; }}
-  .spinL {{ animation: spin 60s linear infinite reverse; transform-box: view-box; transform-origin: {PX}px {PY}px; }}
-  .fast {{ animation-duration: 7s; }}
-  @keyframes spin {{ to {{ transform: rotate(360deg); }} }}
-  .drift {{ animation: drift 14s ease-in-out infinite; }}
-  @keyframes drift {{ 0%,100% {{ transform: translate(0,0); }} 50% {{ transform: translate(-40px,24px); }} }}
-  @media (prefers-reduced-motion: reduce) {{ .w0 {{ opacity: 1; }} }}
-"""
+    H = int(y + 30)
+    head = ""
+    if header:
+        head = (f'<rect width="{W}" height="72" fill="{T["card"]}"/>'
+                f'<line x1="0" y1="72" x2="{W}" y2="72" stroke="{T["line"]}"/>'
+                f'{photo(PAD-6, 14, 44)}'
+                f'<circle cx="{PAD+33}" cy="52" r="6" fill="{T["green"]}" stroke="{T["card"]}" stroke-width="2.5"/>'
+                f'<text x="{PAD+56}" y="34" class="sans" font-size="19" font-weight="800" fill="{T["text"]}">TanmayGPT</text>'
+                f'<text x="{PAD+56}" y="55" class="sans" font-size="13.5" fill="{T["muted"]}"><tspan fill="{T["green"]}">● online</tspan>  ·  trained on 2 years of shipping AI</text>'
+                f'<rect x="{W-PAD-206}" y="22" width="206" height="28" rx="14" fill="{T["teal"]}" fill-opacity="{T["chip"]}" stroke="{T["teal"]}" stroke-opacity=".35"/>'
+                f'<text x="{W-PAD-103}" y="41" text-anchor="middle" class="mono" font-size="12.5" fill="{T["teal"]}">model: tanmay-kala-v2</text>')
     defs = f"""
-  <clipPath id="clip"><rect width="{W}" height="{H}" rx="24"/></clipPath>
-  <clipPath id="face"><circle cx="{PX}" cy="{PY}" r="{PR}"/></clipPath>
-  <radialGradient id="gA"><stop offset="0" stop-color="{T['teal']}" stop-opacity="{T['glow']}"/><stop offset="1" stop-color="{T['teal']}" stop-opacity="0"/></radialGradient>
-  <radialGradient id="gB"><stop offset="0" stop-color="{T['violet']}" stop-opacity="{T['glow']}"/><stop offset="1" stop-color="{T['violet']}" stop-opacity="0"/></radialGradient>
-  <linearGradient id="acc" x1="0" x2="1"><stop offset="0" stop-color="{T['teal']}"/><stop offset=".55" stop-color="{T['cyan']}"/><stop offset="1" stop-color="{T['violet']}"/></linearGradient>
-  <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{T['teal']}"/><stop offset=".5" stop-color="{T['cyan']}" stop-opacity=".15"/><stop offset="1" stop-color="{T['violet']}"/></linearGradient>
-  <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="{T['muted']}" fill-opacity=".18"/></pattern>
+  {avatar_defs()}
+  <clipPath id="win"><rect width="{W}" height="{H}" rx="22"/></clipPath>
+  <linearGradient id="ub" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{T['u1']}"/><stop offset="1" stop-color="{T['u2']}"/></linearGradient>
+  <radialGradient id="gl" cx="1" cy="0" r="1"><stop offset="0" stop-color="{T['teal']}" stop-opacity="{T['glow']}"/><stop offset=".6" stop-color="{T['teal']}" stop-opacity="0"/></radialGradient>
+  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="{T['muted']}" fill-opacity=".16"/></pattern>
+  {''.join(defs_extra)}
 """
     body = f"""
-<g clip-path="url(#clip)">
+<g clip-path="url(#win)">
   <rect width="{W}" height="{H}" fill="{T['bg']}"/>
   <rect width="{W}" height="{H}" fill="url(#dots)"/>
-  <circle cx="{PX}" cy="{PY}" r="300" fill="url(#gA)" class="drift"/>
-  <circle cx="120" cy="420" r="320" fill="url(#gB)" class="drift"{d(-7)}/>
-  {orbit(170, [(-60, 'teal', 6), (75, 'violet', 5), (200, 'amber', 5.5)], 'spinR', '3 8')}
-  {orbit(145, [(20, 'cyan', 4), (150, 'pink', 4.5), (265, 'green', 3.5)], 'spinL', '1 6')}
-  <circle cx="{PX}" cy="{PY}" r="{PR+9}" fill="none" stroke="url(#ring)" stroke-width="3.5" class="spinR fast"/>
-  <circle cx="{PX}" cy="{PY}" r="{PR+2}" fill="{T['bg']}"/>
-  <image x="{PX-PR}" y="{PY-PR}" width="{PR*2}" height="{PR*2}" href="data:image/jpeg;base64,{PHOTO}" clip-path="url(#face)" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="{W}" height="{H}" fill="url(#gl)"/>
+  {head}
 </g>
-<rect x=".75" y=".75" width="{W-1.5}" height="{H-1.5}" rx="23.5" fill="none" stroke="{T['line']}" stroke-width="1.5"/>
-
-<g class="rise"{d(.05)}>
-  <rect x="64" y="52" width="232" height="30" rx="15" fill="{T['green']}" fill-opacity="{T['chip']}" stroke="{T['green']}" stroke-opacity=".4"/>
-  <circle cx="84" cy="67" r="4.5" fill="{T['green']}" class="ping"/><circle cx="84" cy="67" r="4.5" fill="{T['green']}"/>
-  <text x="98" y="72" class="sans" font-size="14" font-weight="600" fill="{T['green']}">Open to AI/ML internships</text>
-</g>
-<g class="rise"{d(.2)}>
-  <text x="60" y="172" class="sans" font-size="84" font-weight="800" letter-spacing="-3" fill="{T['text']}">Tanmay <tspan fill="url(#acc)">Kala</tspan></text>
-</g>
-<g class="rise"{d(.4)}>
-  <text x="64" y="246" class="sans" font-size="36" font-weight="300" letter-spacing="-.5" fill="{T['soft']}">I build</text>
-</g>
-<g{d(.4)}>{words}</g>
-<g class="rise"{d(.6)}>
-  <text x="64" y="288" class="sans" font-size="18" fill="{T['muted']}">Generative AI &amp; NLP Engineer  ·  Founder @ <tspan fill="{T['text']}" font-weight="700">Naxatra AI</tspan>  ·  VIT Bhopal</text>
-</g>
-<g class="rise"{d(.8)}>{''.join(chips)}</g>
+<rect x=".75" y=".75" width="{W-1.5}" height="{H-1.5}" rx="21.5" fill="none" stroke="{T['line']}" stroke-width="1.5"/>
+{''.join(items)}
 """
-    return svg(W, H, body, css, defs, "Tanmay Kala — I build AI products that ship")
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
+            f'aria-label="Chat with TanmayGPT"><title>Chat with TanmayGPT</title><style>{BASE_CSS}</style>'
+            f'<defs>{defs}</defs>{body}</svg>\n')
 
 
-# ================================================================= BENTO
-def bento(T):
-    W, G, R = 1200, 16, 200
-    cw = (W - 3 * G) / 4
-    H = 2 * R + G
-    parts = []
-
-    # A — shipped (2 wide)
-    chips, cx = [], 28
-    for t, c in [("SwachhVan", "teal"), ("Hey Dude", "violet"), ("Travel Assist", "pink"),
-                 ("Whisper", "green"), ("VibeHub", "cyan")]:
-        s, w = chip(T, cx, 146, t, T[c], size=12)
-        chips.append(s)
-        cx += w + 8
-    parts.append(tile(T, 0, 0, 2*cw + G, R, f"""
-  {label(T, 28, 40, 'SHIPPED', T['teal'])}
-  <text x="24" y="122" class="sans" font-size="84" font-weight="800" letter-spacing="-4" fill="url(#acc)">5+</text>
-  <text x="150" y="92" class="sans" font-size="24" font-weight="700" fill="{T['text']}">AI products, live on the web</text>
-  <text x="150" y="118" class="sans" font-size="15" fill="{T['muted']}">idea → model → deployed product, end to end</text>
-  {''.join(chips)}""", .05))
-
-    # B — hackathon
-    x = 2 * (cw + G)
-    parts.append(tile(T, x, 0, cw, R, f"""
-  {label(T, x+28, 40, 'HACKATHON', T['cyan'])}
-  <text x="{x+26}" y="112" class="sans" font-size="54" font-weight="800" letter-spacing="-2" fill="{T['cyan']}">Top 25</text>
-  <text x="{x+28}" y="142" class="sans" font-size="17" font-weight="600" fill="{T['text']}">of 400+ teams</text>
-  <text x="{x+28}" y="166" class="sans" font-size="13.5" fill="{T['muted']}">Hack For Green Bharat · SwachhVan</text>""", .15))
-
-    # C — stack (tall)
-    x = 3 * (cw + G)
-    stack = [("Python", "teal"), ("PyTorch", "pink"), ("LLMs", "violet"), ("RAG", "cyan"),
-             ("Gemini", "cyan"), ("LangGraph", "teal"), ("Hugging Face", "amber"), ("OpenCV", "green"),
-             ("Whisper", "violet"), ("FastAPI", "teal"), ("TypeScript", "cyan"), ("Docker", "cyan"),
-             ("scikit-learn", "amber"), ("Transformers", "violet"), ("Gradio", "amber"), ("Streamlit", "pink"),
-             ("SQL", "green"), ("OCI", "pink"), ("AWS", "amber"), ("GCP", "cyan")]
-    chips, cx, cy = [], x + 24, 66
-    for t, c in stack:
-        w = mono_w(t, 12) + 24
-        if cx + w > x + cw - 20:
-            cx, cy = x + 24, cy + 38
-        s, w = chip(T, cx, cy, t, T[c], size=12)
-        chips.append(s)
-        cx += w + 8
-    parts.append(tile(T, x, 0, cw, H, f"""
-  {label(T, x+28, 40, 'STACK', T['violet'])}
-  {''.join(chips)}
-  <text x="{x+28}" y="{H-28}" class="mono" font-size="12" fill="{T['muted']}">+ always learning<tspan class="blink" fill="{T['violet']}">_</tspan></text>""", .25))
-
-    # D — accuracy
-    y = R + G
-    parts.append(tile(T, 0, y, cw, R, f"""
-  {label(T, 28, y+40, 'DEEP LEARNING', T['pink'])}
-  <text x="26" y="{y+112}" class="sans" font-size="54" font-weight="800" letter-spacing="-2" fill="{T['pink']}">96.82%</text>
-  <text x="28" y="{y+142}" class="sans" font-size="17" font-weight="600" fill="{T['text']}">test accuracy</text>
-  <text x="28" y="{y+166}" class="sans" font-size="13.5" fill="{T['muted']}">43-class CNN built from scratch</text>""", .35))
-
-    # E — now (2 wide)
-    x = cw + G
-    rows = [("Building Naxatra AI", "AI products for civic & student problems", "teal"),
-            ("Shipping voice agents", "LangGraph + CALL-E · 421 tests passing", "violet"),
-            ("Certified by Oracle", "OCI 2025 Generative AI Professional", "amber")]
-    lines = "".join(
-        f'<rect x="{x+28}" y="{y+62 + i*42}" width="4" height="30" rx="2" fill="{T[c]}"/>'
-        f'<text x="{x+46}" y="{y+76 + i*42}" class="sans" font-size="16" font-weight="700" fill="{T["text"]}">{e(a)}</text>'
-        f'<text x="{x+46}" y="{y+94 + i*42}" class="sans" font-size="13.5" fill="{T["muted"]}">{e(b)}</text>'
-        for i, (a, b, c) in enumerate(rows))
-    parts.append(tile(T, x, y, 2*cw + G, R, f"""
-  <circle cx="{x+32}" cy="{y+36}" r="4" fill="{T['green']}" class="ping"/>
-  {label(T, x+28, y+40, 'RIGHT NOW', T['green'])}
-  {lines}""", .45))
-
-    defs = (f'<linearGradient id="acc" x1="0" x2="1"><stop offset="0" stop-color="{T["teal"]}"/>'
-            f'<stop offset="1" stop-color="{T["violet"]}"/></linearGradient>')
-    return svg(W, H, "\n".join(parts), "", defs, "Highlights: 5+ AI products, Top 25 of 400+ teams, 96.82% accuracy")
-
-
-# ================================================================= CARDS
+# ------------------------------------------------------------- link cards
 PROJECTS = [
-    dict(slug="swachhvan", tag="FLAGSHIP · LIVE", color="teal", title="SwachhVan",
-         desc="AI demand forecasting for mobile sanitation vans", metric="Top 25", mlabel="of 400+ teams",
-         chips=["TypeScript", "Forecasting", "GPS", "Vercel"]),
-    dict(slug="heydude", tag="VOICE AI · LIVE", color="violet", title="Hey Dude",
-         desc="Voice assistant with face-auth, Gemini & WhatsApp control", metric="15 days",
-         mlabel="zero → production", chips=["Python", "Gemini", "OpenCV", "SQLite"]),
-    dict(slug="marketbuddy", tag="AGENTIC AI", color="amber", title="Market Buddy",
-         desc="Voice agent that turns supplier calls into commitments", metric="421",
-         mlabel="tests passing", chips=["Next.js", "LangGraph", "CALL-E", "TypeScript"]),
-    dict(slug="gtsrb", tag="DEEP LEARNING", color="pink", title="TrafficSignNet",
-         desc="43-class traffic-sign CNN written from scratch in PyTorch", metric="96.82%",
-         mlabel="test accuracy", chips=["PyTorch", "CNN", "CLI", "Tested"]),
+    dict(slug="swachhvan", ini="SV", color="teal", title="SwachhVan", tech="TypeScript · Forecasting · GPS",
+         desc="AI demand forecasting for mobile sanitation vans", metric="Top 25", mlabel="of 400+ teams"),
+    dict(slug="heydude", ini="HD", color="violet", title="Hey Dude", tech="Python · Gemini · OpenCV",
+         desc="Voice assistant with face-auth & WhatsApp control", metric="15 days", mlabel="zero → production"),
+    dict(slug="marketbuddy", ini="MB", color="amber", title="Market Buddy", tech="Next.js · LangGraph · CALL-E",
+         desc="Voice agent that turns supplier calls into deals", metric="421", mlabel="tests passing"),
+    dict(slug="gtsrb", ini="TS", color="pink", title="TrafficSignNet", tech="PyTorch · CNN · CLI",
+         desc="43-class traffic-sign CNN built from scratch", metric="96.82%", mlabel="test accuracy"),
 ]
 
 
 def card(T, i, p):
-    W, H = 592, 220
+    CW, CH = 492, 156
     c = T[p["color"]]
-    chips, cx = [], 28
-    for t in p["chips"]:
-        s, w = chip(T, cx, 166, t, c, size=12)
-        chips.append(s)
-        cx += w + 8
     css = f"""
-  .shine {{ animation: shine 8s ease-in-out {i*1.3:.1f}s infinite; }}
-  @keyframes shine {{ 0% {{ transform: translateX(-200px) skewX(-20deg); }} 30%,100% {{ transform: translateX(800px) skewX(-20deg); }} }}
+  .shine {{ animation: shine 8s ease-in-out {i*1.2:.1f}s infinite; }}
+  @keyframes shine {{ 0% {{ transform: translateX(-160px) skewX(-20deg); }} 30%,100% {{ transform: translateX(700px) skewX(-20deg); }} }}
 """
-    defs = f"""
-  <clipPath id="c"><rect width="{W}" height="{H}" rx="20"/></clipPath>
-  <radialGradient id="glow" cx="1" cy="0" r="1"><stop offset="0" stop-color="{c}" stop-opacity="{T['glow']}"/><stop offset=".7" stop-color="{c}" stop-opacity="0"/></radialGradient>
-  <linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="{c}" stop-opacity="0"/><stop offset=".5" stop-color="{c}" stop-opacity=".07"/><stop offset="1" stop-color="{c}" stop-opacity="0"/></linearGradient>
-"""
-    body = f"""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{CW}" height="{CH}" viewBox="0 0 {CW} {CH}" role="img" aria-label="{e(p['title'])}">
+<title>{e(p['title'])}</title><style>{BASE_CSS}{css}</style>
+<defs>
+  <clipPath id="c"><rect width="{CW}" height="{CH}" rx="18"/></clipPath>
+  <linearGradient id="ic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{c}"/><stop offset="1" stop-color="{c}" stop-opacity=".65"/></linearGradient>
+  <radialGradient id="gl" cx="1" cy="0" r="1"><stop offset="0" stop-color="{c}" stop-opacity="{T['glow']}"/><stop offset=".7" stop-color="{c}" stop-opacity="0"/></radialGradient>
+  <linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="{c}" stop-opacity="0"/><stop offset=".5" stop-color="{c}" stop-opacity=".08"/><stop offset="1" stop-color="{c}" stop-opacity="0"/></linearGradient>
+</defs>
 <g clip-path="url(#c)">
-  <rect width="{W}" height="{H}" fill="{T['card']}"/>
-  <rect width="{W}" height="{H}" fill="url(#glow)"/>
-  <rect width="120" height="{H}" fill="url(#sh)" class="shine"/>
+  <rect width="{CW}" height="{CH}" fill="{T['card']}"/>
+  <rect width="{CW}" height="{CH}" fill="url(#gl)"/>
+  <rect width="100" height="{CH}" fill="url(#sh)" class="shine"/>
+  <rect width="4" height="{CH}" fill="{c}"/>
 </g>
-<rect x=".5" y=".5" width="{W-1}" height="{H-1}" rx="19.5" fill="none" stroke="{T['line']}"/>
-<g class="rise">
-  {label(T, 28, 42, p['tag'], c)}
-  <text x="26" y="96" class="sans" font-size="32" font-weight="800" letter-spacing="-1" fill="{T['text']}">{e(p['title'])}</text>
-  <text x="28" y="130" class="sans" font-size="15" fill="{T['muted']}">{e(p['desc'])}</text>
-  <text x="{W-28}" y="72" text-anchor="end" class="sans" font-size="38" font-weight="800" letter-spacing="-1.5" fill="{c}">{e(p['metric'])}</text>
-  <text x="{W-28}" y="94" text-anchor="end" class="sans" font-size="13" fill="{T['muted']}">{e(p['mlabel'])}</text>
+<rect x=".5" y=".5" width="{CW-1}" height="{CH-1}" rx="17.5" fill="none" stroke="{T['line']}"/>
+<g class="pop popL">
+  <rect x="24" y="24" width="54" height="54" rx="14" fill="url(#ic)"/>
+  <text x="51" y="58" text-anchor="middle" class="sans" font-size="20" font-weight="800" fill="{T['bg']}">{e(p['ini'])}</text>
+  <text x="94" y="48" class="sans" font-size="22" font-weight="800" letter-spacing="-.5" fill="{T['text']}">{e(p['title'])}</text>
+  <text x="94" y="70" class="mono" font-size="12.5" fill="{T['muted']}">{e(p['tech'])}</text>
+  <text x="{CW-24}" y="50" text-anchor="end" class="sans" font-size="27" font-weight="800" letter-spacing="-1" fill="{c}">{e(p['metric'])}</text>
+  <text x="{CW-24}" y="70" text-anchor="end" class="sans" font-size="12.5" fill="{T['muted']}">{e(p['mlabel'])}</text>
+  <line x1="24" y1="98" x2="{CW-24}" y2="98" stroke="{T['line']}"/>
+  <text x="24" y="128" class="sans" font-size="15.5" fill="{T['soft']}">{e(p['desc'])}</text>
+  <text x="{CW-24}" y="129" text-anchor="end" class="mono" font-size="17" font-weight="700" fill="{c}">↗</text>
 </g>
-<g class="rise"{d(.2)}>{''.join(chips)}
-  <text x="{W-28}" y="186" text-anchor="end" class="mono" font-size="18" fill="{c}">↗</text>
-</g>
+</svg>
 """
-    return svg(W, H, body, css, defs, p["title"])
 
 
 if __name__ == "__main__":
@@ -299,7 +279,10 @@ if __name__ == "__main__":
         old.unlink()
     print("Building assets:")
     for mode, T in (("dark", DARK), ("light", LIGHT)):
-        write(f"hero-{mode}.svg", hero(T))
-        write(f"bento-{mode}.svg", bento(T))
+        for name, content in [(f"chat-{mode}.svg", chat(T, CHAT_TOP, header=True, composer=False)),
+                              (f"chat-end-{mode}.svg", chat(T, CHAT_END, header=False, composer=True))]:
+            (OUT / name).write_text(content, encoding="utf-8")
+            print(f"  assets/{name}")
         for i, p in enumerate(PROJECTS):
-            write(f"card-{p['slug']}-{mode}.svg", card(T, i, p))
+            (OUT / f"card-{p['slug']}-{mode}.svg").write_text(card(T, i, p), encoding="utf-8")
+            print(f"  assets/card-{p['slug']}-{mode}.svg")
