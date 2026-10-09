@@ -12,10 +12,12 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent.parent / "assets"
 OUT.mkdir(exist_ok=True)
 
-DARK = dict(name="dark", bg="#0B0E14", panel="#11161F", line="#262E3B", text="#ECE9E2", soft="#C4C7CC",
-            muted="#868C96", red="#D2404F", red2="#8B1E2D", green="#34D399", ink="#ECE9E2", grid=".05")
-LIGHT = dict(name="light", bg="#F4F2ED", panel="#EBE7DF", line="#D3CDC1", text="#14171C", soft="#33383F",
-             muted="#646973", red="#8B1E2D", red2="#8B1E2D", green="#047857", ink="#14171C", grid=".06")
+DARK = dict(name="dark", bg="#050817", bg2="#111044", panel="#071D36", line="#1F2C63", text="#E4E9FF",
+            soft="#A9B8E8", muted="#7F8BB8", red="#FF3158", red2="#8B102B", blue="#5145FF", blue2="#7C73FF",
+            green="#34D399", ink="#E4E9FF", grid=".05", glowR=".45", glowB=".40")
+LIGHT = dict(name="light", bg="#EEF1FF", bg2="#DCE1FF", panel="#E2E7FC", line="#C3CBEE", text="#050817",
+             soft="#111044", muted="#4B557E", red="#8B102B", red2="#8B102B", blue="#5145FF", blue2="#5145FF",
+             green="#047857", ink="#111044", grid=".06", glowR=".14", glowB=".16")
 
 SANS = "'Segoe UI', Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif"
 COND = "Bahnschrift, 'DIN Condensed', 'Arial Narrow', 'Roboto Condensed', 'Segoe UI', sans-serif"
@@ -32,6 +34,8 @@ BASE_CSS = f"""
   .stamp {{ animation: stamp .5s cubic-bezier(.2,.8,.2,1.3) both; transform-box: fill-box; transform-origin: center; }}
   .blink {{ animation: blink 1.2s steps(1) infinite; }}
   .ping {{ animation: ping 2s cubic-bezier(0,0,.2,1) infinite; transform-box: fill-box; transform-origin: center; }}
+  .drift {{ animation: drift 16s ease-in-out infinite; }}
+  @keyframes drift {{ 0%,100% {{ transform: translate(0,0); }} 50% {{ transform: translate(30px,-16px); }} }}
   @keyframes rise {{ from {{ opacity: 0; transform: translateY(14px); }} to {{ opacity: 1; transform: none; }} }}
   @keyframes unredact {{ from {{ transform: scaleX(1); }} to {{ transform: scaleX(0); }} }}
   @keyframes stamp {{ from {{ opacity: 0; transform: scale(1.8); }} to {{ opacity: 1; transform: none; }} }}
@@ -61,7 +65,9 @@ def frame(T, w, h, file_no, right):
         for x, y, dx, dy in [(14, 14, 1, 1), (w-14, 14, -1, 1), (14, h-14, 1, -1), (w-14, h-14, -1, -1)])
     return f"""
 <g clip-path="url(#sheet)">
-  <rect width="{w}" height="{h}" fill="{T['bg']}"/>
+  <rect width="{w}" height="{h}" fill="url(#bgG)"/>
+  <ellipse cx="{w*.12:.0f}" cy="{h}" rx="{w*.42:.0f}" ry="{h*.9:.0f}" fill="url(#gR)" class="drift"/>
+  <ellipse cx="{w*.9:.0f}" cy="0" rx="{w*.45:.0f}" ry="{h:.0f}" fill="url(#gB)" class="drift" style="animation-delay:-6s"/>
   <rect width="{w}" height="{h}" fill="url(#grid)"/>
 </g>
 <rect x=".75" y=".75" width="{w-1.5}" height="{h-1.5}" rx="14" fill="none" stroke="{T['line']}" stroke-width="1.5"/>
@@ -74,6 +80,12 @@ def frame(T, w, h, file_no, right):
 
 def sheet_defs(T, w, h):
     return (f'<clipPath id="sheet"><rect width="{w}" height="{h}" rx="14"/></clipPath>'
+            f'<linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{T["bg"]}"/>'
+            f'<stop offset=".55" stop-color="{T["bg"]}"/><stop offset="1" stop-color="{T["bg2"]}"/></linearGradient>'
+            f'<radialGradient id="gR"><stop offset="0" stop-color="{T["red2"]}" stop-opacity="{T["glowR"]}"/>'
+            f'<stop offset="1" stop-color="{T["red2"]}" stop-opacity="0"/></radialGradient>'
+            f'<radialGradient id="gB"><stop offset="0" stop-color="{T["blue"]}" stop-opacity="{T["glowB"]}"/>'
+            f'<stop offset="1" stop-color="{T["blue"]}" stop-opacity="0"/></radialGradient>'
             f'<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">'
             f'<path d="M24 0H0V24" fill="none" stroke="{T["ink"]}" stroke-opacity="{T["grid"]}"/></pattern>')
 
@@ -86,8 +98,8 @@ def emblem(T, cx, cy):
     bars = []
     for i, y in enumerate(range(cy - 120, cy + 140, 9)):
         w = 70 + 90 * abs(math.sin(i * .55)) * (1 - abs(y - cy) / 190)
-        bars.append(f'<rect x="{cx - w/2:.1f}" y="{y}" width="{w:.1f}" height="3" rx="1.5" fill="{T["muted"]}" '
-                    f'fill-opacity=".45" class="wave"{dl(-(i % 9) * .17)}/>')
+        bars.append(f'<rect x="{cx - w/2:.1f}" y="{y}" width="{w:.1f}" height="3" rx="1.5" fill="{T["blue2"]}" '
+                    f'fill-opacity=".55" class="wave"{dl(-(i % 9) * .17)}/>')
     eyes = (f'<path d="M{cx-74},{cy-14} L{cx-14},{cy-4} L{cx-18},{cy+8} L{cx-70},{cy+2} Z" fill="{T["red"]}" class="eye"/>'
             f'<path d="M{cx+74},{cy-14} L{cx+14},{cy-4} L{cx+18},{cy+8} L{cx+70},{cy+2} Z" fill="{T["red"]}" class="eye"/>')
     ticks = "".join(
@@ -176,21 +188,21 @@ def swachhvan(T):
         (f"M{mx+150},{my} V{my+46} H{mx+338} V{my+62}", 6.5),
     ]
     route_svg = "".join(
-        f'<path d="{d}" fill="none" stroke="{T["green"]}" stroke-width="2.5" stroke-dasharray="6 6" stroke-opacity=".8"/>'
-        f'<g><rect x="-9" y="-6" width="18" height="12" rx="3" fill="{T["green"]}"/>'
+        f'<path d="{d}" fill="none" stroke="{T["blue2"]}" stroke-width="2.5" stroke-dasharray="6 6" stroke-opacity=".8"/>'
+        f'<g><rect x="-9" y="-6" width="18" height="12" rx="3" fill="{T["blue2"]}"/>'
         f'<animateMotion dur="{dur}s" repeatCount="indefinite" path="{d}" keyPoints="0;1;1" keyTimes="0;.8;1" calcMode="linear"/></g>'
         for d, dur in routes)
     fig = f"""
 <rect x="{mx-16}" y="{my-16}" width="{mw+32}" height="{mh+32}" rx="10" fill="{T['panel']}" stroke="{T['line']}"/>
 <g clip-path="url(#map)">{streets}{zone_svg}{dem_svg}{route_svg}</g>
 <text x="{mx-16}" y="{my+mh+42}" class="mono" font-size="11.5" letter-spacing="1.5" fill="{T['muted']}">FIG. 1 — FORECAST → DISPATCH</text>
-<text x="{mx+mw+16}" y="{my+mh+42}" text-anchor="end" class="mono" font-size="11.5" fill="{T['muted']}"><tspan fill="{T['red']}">●</tspan> demand  <tspan fill="{T['green']}">■</tspan> van</text>
+<text x="{mx+mw+16}" y="{my+mh+42}" text-anchor="end" class="mono" font-size="11.5" fill="{T['muted']}"><tspan fill="{T['red']}">●</tspan> demand  <tspan fill="{T['blue2']}">■</tspan> van</text>
 """
     metrics = [("TOP 25", "of 400+ teams"), ("−60%", "dispatch planning"), ("3", "city zones"), ("100+", "simulated bookings")]
     tw = 154
     met_svg = "".join(
         f'<g class="rise"{dl(.6 + i*.12)}><rect x="{40 + i*(tw+12)}" y="262" width="{tw}" height="78" rx="8" fill="{T["panel"]}" stroke="{T["line"]}"/>'
-        f'<rect x="{40 + i*(tw+12)}" y="262" width="3" height="78" fill="{T["red"]}"/>'
+        f'<rect x="{40 + i*(tw+12)}" y="262" width="3" height="78" fill="{T["red"] if i % 2 == 0 else T["blue2"]}"/>'
         f'<text x="{58 + i*(tw+12)}" y="298" class="cond" font-size="30" font-weight="700" fill="{T["text"]}">{e(v)}</text>'
         f'<text x="{58 + i*(tw+12)}" y="322" class="sans" font-size="12.5" fill="{T["muted"]}">{e(l)}</text></g>'
         for i, (v, l) in enumerate(metrics))
@@ -235,7 +247,7 @@ def build_log(T):
 <text x="{W-40}" y="44" text-anchor="end" class="mono" font-size="12" letter-spacing="2" fill="{T['muted']}">REPEAT UNTIL USEFUL <tspan fill="{T['red']}">↻</tspan></text>
 <line x1="{x0}" y1="{y}" x2="{x1}" y2="{y}" stroke="{T['line']}" stroke-width="2"/>
 <line x1="{x0}" y1="{y}" x2="{x1}" y2="{y}" stroke="{T['muted']}" stroke-width="2" stroke-dasharray="2 8"/>
-<path d="M{x1+24},{y} C{x1+90},{y} {x1+90},{y-62} {x1-20},{y-62} H{x0+20} C{x0-90},{y-62} {x0-90},{y} {x0-24},{y}" fill="none" stroke="{T['red']}" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="4 6"/>
+<path d="M{x1+24},{y} C{x1+90},{y} {x1+90},{y-62} {x1-20},{y-62} H{x0+20} C{x0-90},{y-62} {x0-90},{y} {x0-24},{y}" fill="none" stroke="{T['blue2']}" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="4 6"/>
 <g class="signal"><circle cx="{x0}" cy="{y}" r="6" fill="{T['red']}"/><circle cx="{x0}" cy="{y}" r="12" fill="{T['red']}" fill-opacity=".25"/></g>
 {nodes}
 """
