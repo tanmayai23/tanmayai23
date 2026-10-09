@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="230" viewBox="0 0 1200 230" role="img" aria-label="Build log: explore the work, read the code, test the claims, improve the system."><title>Build log: explore the work, read the code, test the claims, improve the system.</title><style>
+  .sans { font-family: 'Segoe UI', Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+  .cond { font-family: Bahnschrift, 'DIN Condensed', 'Arial Narrow', 'Roboto Condensed', 'Segoe UI', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'Cascadia Code', SFMono-Regular, Consolas, 'Courier New', monospace; }
+  .serif { font-family: Georgia, 'Times New Roman', serif; }
+  .rise { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+  .redact { animation: unredact .7s cubic-bezier(.7,0,.3,1) both; transform-box: fill-box; transform-origin: right; }
+  .stamp { animation: stamp .5s cubic-bezier(.2,.8,.2,1.3) both; transform-box: fill-box; transform-origin: center; }
+  .blink { animation: blink 1.2s steps(1) infinite; }
+  .ping { animation: ping 2s cubic-bezier(0,0,.2,1) infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes unredact { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+  @keyframes stamp { from { opacity: 0; transform: scale(1.8); } to { opacity: 1; transform: none; } }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes ping { 0% { opacity: .8; transform: scale(1); } 80%,100% { opacity: 0; transform: scale(2.8); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .redact { display: none; } }
+
+  .signal { animation: travel 5s cubic-bezier(.6,0,.4,1) infinite; }
+  @keyframes travel { 0% { transform: translateX(0); opacity: 0; } 6% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateX(900px); opacity: 0; } }
+  .lit { animation: lit 5s linear infinite; }
+  @keyframes lit { 0%,100% { fill: #EBE7DF; } 4%,14% { fill: #8B1E2D; } 22% { fill: #EBE7DF; } }
+</style><defs><clipPath id="sheet"><rect width="1200" height="230" rx="14"/></clipPath><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#14171C" stroke-opacity=".06"/></pattern></defs>
+
+<g clip-path="url(#sheet)">
+  <rect width="1200" height="230" fill="#F4F2ED"/>
+  <rect width="1200" height="230" fill="url(#grid)"/>
+</g>
+<rect x=".75" y=".75" width="1198.5" height="228.5" rx="14" fill="none" stroke="#D3CDC1" stroke-width="1.5"/>
+<path d="M14,28 V14 H28" fill="none" stroke="#646973" stroke-width="1.5"/><path d="M1186,28 V14 H1172" fill="none" stroke="#646973" stroke-width="1.5"/><path d="M14,202 V216 H28" fill="none" stroke="#646973" stroke-width="1.5"/><path d="M1186,202 V216 H1172" fill="none" stroke="#646973" stroke-width="1.5"/>
+<text x="40" y="44" class="mono" font-size="12" letter-spacing="2" fill="#646973">BUILD LOG  ·  OPERATING LOOP</text>
+<text x="1160" y="44" text-anchor="end" class="mono" font-size="12" letter-spacing="2" fill="#646973"></text>
+<line x1="40" y1="58" x2="1160" y2="58" stroke="#D3CDC1"/>
+
+<text x="1160" y="44" text-anchor="end" class="mono" font-size="12" letter-spacing="2" fill="#646973">REPEAT UNTIL USEFUL <tspan fill="#8B1E2D">↻</tspan></text>
+<line x1="150" y1="132" x2="1050" y2="132" stroke="#D3CDC1" stroke-width="2"/>
+<line x1="150" y1="132" x2="1050" y2="132" stroke="#646973" stroke-width="2" stroke-dasharray="2 8"/>
+<path d="M1074,132 C1140,132 1140,70 1030,70 H170 C60,70 60,132 126,132" fill="none" stroke="#8B1E2D" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="4 6"/>
+<g class="signal"><circle cx="150" cy="132" r="6" fill="#8B1E2D"/><circle cx="150" cy="132" r="12" fill="#8B1E2D" fill-opacity=".25"/></g>
+<g class="rise" style="animation-delay:0.10s"><circle cx="150" cy="132" r="24" fill="#EBE7DF" stroke="#14171C" stroke-width="2" class="lit" style="animation-delay:0.00s"/><text x="150" y="137" text-anchor="middle" class="mono" font-size="13" font-weight="800" fill="#14171C">01</text><text x="150" y="188" text-anchor="middle" class="cond" font-size="22" font-weight="700" letter-spacing="2" fill="#14171C">EXPLORE</text><text x="150" y="208" text-anchor="middle" class="serif" font-size="15" font-style="italic" fill="#646973">the work</text></g><g class="rise" style="animation-delay:0.25s"><circle cx="450" cy="132" r="24" fill="#EBE7DF" stroke="#14171C" stroke-width="2" class="lit" style="animation-delay:1.37s"/><text x="450" y="137" text-anchor="middle" class="mono" font-size="13" font-weight="800" fill="#14171C">02</text><text x="450" y="188" text-anchor="middle" class="cond" font-size="22" font-weight="700" letter-spacing="2" fill="#14171C">READ</text><text x="450" y="208" text-anchor="middle" class="serif" font-size="15" font-style="italic" fill="#646973">the code</text></g><g class="rise" style="animation-delay:0.40s"><circle cx="750" cy="132" r="24" fill="#EBE7DF" stroke="#14171C" stroke-width="2" class="lit" style="animation-delay:2.73s"/><text x="750" y="137" text-anchor="middle" class="mono" font-size="13" font-weight="800" fill="#14171C">03</text><text x="750" y="188" text-anchor="middle" class="cond" font-size="22" font-weight="700" letter-spacing="2" fill="#14171C">TEST</text><text x="750" y="208" text-anchor="middle" class="serif" font-size="15" font-style="italic" fill="#646973">the claims</text></g><g class="rise" style="animation-delay:0.55s"><circle cx="1050" cy="132" r="24" fill="#EBE7DF" stroke="#14171C" stroke-width="2" class="lit" style="animation-delay:4.10s"/><text x="1050" y="137" text-anchor="middle" class="mono" font-size="13" font-weight="800" fill="#14171C">04</text><text x="1050" y="188" text-anchor="middle" class="cond" font-size="22" font-weight="700" letter-spacing="2" fill="#14171C">IMPROVE</text><text x="1050" y="208" text-anchor="middle" class="serif" font-size="15" font-style="italic" fill="#646973">the system</text></g>
+</svg>

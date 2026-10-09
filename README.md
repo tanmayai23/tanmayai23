@@ -1,40 +1,169 @@
+<div align="center">
+
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/chat-dark.svg" />
-  <img src="./assets/chat-light.svg" width="100%" alt="Chat with TanmayGPT — Tanmay Kala is a Generative AI & NLP engineer and founder of Naxatra AI. 5+ AI products live, Top 25 of 400+ teams, 96.82% CNN accuracy, 421 tests passing." />
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/ghost-protocol-dark.svg">
+  <img src="./assets/ghost-protocol-light.svg" alt="Tanmay Kala — AI engineer, founder, and systems thinker. Build quietly. Ship relentlessly." width="100%">
+</picture>
+
+<br>
+
+<a href="https://www.tanmaykala.dev/"><img src="https://img.shields.io/badge/PORTFOLIO-101827?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio"></a>
+<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/LINKEDIN-101827?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+<a href="https://github.com/tanmayai23"><img src="https://img.shields.io/badge/OPEN_SOURCE-101827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+<a href="mailto:tanmaykala171206@gmail.com"><img src="https://img.shields.io/badge/CONTACT-101827?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
+
+</div>
+
+---
+
+### `00 / THE BRIEF`
+
+# I build AI that leaves the demo stage.
+
+I'm **Tanmay Kala** — a Generative AI and NLP engineer, Computer Science student at VIT Bhopal, and founder of **NAXATRA AI**.
+
+I work at the intersection of applied AI and product engineering: turning models, data, and APIs into tools people can actually use. My long-term direction is to help make useful AI infrastructure more accessible to builders across **Bharat**.
+
+> **Operating principle:** Ideas are cheap. Useful systems, shipped and measured, are the work.
+
+- **Building:** AI products, LLM workflows, voice interfaces, and applied ML systems.
+- **Exploring:** RAG, model evaluation, fine-tuning, NLP, and production-minded AI engineering.
+- **Founder lens:** Start with a real problem, validate the workflow, then build the smallest useful system.
+- **Open to:** AI/ML and Generative AI internships, serious collaborators, and technically ambitious projects.
+
+---
+
+### `01 / SELECTED OPERATIONS`
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/project-swachhvan-dark.svg">
+  <img src="./assets/project-swachhvan-light.svg" alt="SwachhVan project card" width="100%">
 </picture>
 
 <p align="center">
-<a href="https://swachhvan.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/card-swachhvan-dark.svg" /><img src="./assets/card-swachhvan-light.svg" width="49%" alt="SwachhVan — AI smart sanitation, Top 25 of 400+ teams" /></picture></a>
-<a href="https://github.com/tanmayai23/Hey-Dude-Voice-Assistant"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/card-heydude-dark.svg" /><img src="./assets/card-heydude-light.svg" width="49%" alt="Hey Dude — AI voice assistant built in 15 days" /></picture></a>
-<a href="https://github.com/tanmayai23/CALL-E-Hackathon"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/card-marketbuddy-dark.svg" /><img src="./assets/card-marketbuddy-light.svg" width="49%" alt="Market Buddy — autonomous voice agent, 421 tests" /></picture></a>
-<a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/card-gtsrb-dark.svg" /><img src="./assets/card-gtsrb-light.svg" width="49%" alt="TrafficSignNet — 43-class CNN, 96.82% accuracy" /></picture></a>
+  <a href="https://swachhvan.vercel.app/"><strong>OPEN LIVE PRODUCT ↗</strong></a>
 </p>
 
-<p align="center"><sub>
-  also shipped →
-  <a href="https://aitravelassist.vercel.app">AI Travel Assist</a> ·
-  <a href="https://whisper-ai-transcription.vercel.app">Whisper Transcribe</a> ·
-  <a href="https://vibehub-liard.vercel.app">VibeHub</a> ·
-  <a href="https://github.com/tanmayai23?tab=repositories">all repos</a>
-</sub></p>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/chat-more-dark.svg" />
-  <img src="./assets/chat-more-light.svg" width="100%" alt="Trophy case: Top 25 of 400+ at Hack For Green Bharat, Summer of Codefest '25, OCI Generative AI Professional, OCI AI Foundations. Stack: Python, PyTorch, TensorFlow, scikit-learn, OpenCV, LLMs, RAG, LangGraph, TypeScript, Next.js, FastAPI, Docker, AWS, GCP. Commit history for the last 12 months." />
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/chat-end-dark.svg" />
-  <img src="./assets/chat-end-light.svg" width="100%" alt="How do we connect? He's open to AI/ML & GenAI internships and to building with anyone solving something real." />
-</picture>
-
-<h3 align="center">Open to connect</h3>
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>01. Hey Dude</h3>
+      <p><strong>Voice-first desktop assistant</strong></p>
+      Voice interaction, Gemini-powered conversation, face recognition, hotword detection, and desktop automation.
+      <br><br>
+      <sub>Python · Gemini · OpenCV · SQLite</sub>
+      <br><br>
+      <a href="https://github.com/tanmayai23/Hey-Dude-Voice-Assistant">Inspect the repository ↗</a>
+    </td>
+    <td width="50%" valign="top">
+      <h3>02. Market Buddy / CALL-E</h3>
+      <p><strong>Autonomous voice-agent experience</strong></p>
+      A hackathon build focused on conversational workflows and dependable behavior, with 421 passing tests reported for the project.
+      <br><br>
+      <sub>Agents · TypeScript · Testing</sub>
+      <br><br>
+      <a href="https://github.com/tanmayai23/CALL-E-Hackathon">Inspect the repository ↗</a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>03. TrafficSignNet</h3>
+      <p><strong>Computer vision classification</strong></p>
+      CNN-based traffic-sign recognition across 43 classes, with 96.82% accuracy reported for the model.
+      <br><br>
+      <sub>Python · CNN · Computer Vision</sub>
+      <br><br>
+      <a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition">Inspect the repository ↗</a>
+    </td>
+    <td width="50%" valign="top">
+      <h3>04. Hey, where next?</h3>
+      <p><strong>AI Travel Assist</strong></p>
+      Location-aware travel discovery designed to surface interesting places along a journey and help travelers decide what to explore.
+      <br><br>
+      <sub>Python · Gemini API · Geolocation</sub>
+      <br><br>
+      <a href="https://aitravelassist.vercel.app/">Open live product ↗</a>
+    </td>
+  </tr>
+</table>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://skillicons.dev/icons?i=linkedin" width="48" alt="LinkedIn" /></a>&nbsp;&nbsp;
-  <a href="mailto:tanmaykala171206@gmail.com"><img src="https://skillicons.dev/icons?i=gmail" width="48" alt="Email" /></a>&nbsp;&nbsp;
-  <a href="https://portfolio-five-topaz-l2jyqjtlet.vercel.app"><img src="https://skillicons.dev/icons?i=vercel" width="48" alt="Portfolio" /></a>&nbsp;&nbsp;
-  <a href="https://github.com/tanmayai23"><img src="https://skillicons.dev/icons?i=github" width="48" alt="GitHub" /></a>&nbsp;&nbsp;
-  <a href="https://www.instagram.com/tanmayekaala__/"><img src="https://skillicons.dev/icons?i=instagram" width="48" alt="Instagram" /></a>&nbsp;&nbsp;
-  <a href="https://www.youtube.com/@techtalks-14"><img src="https://img.icons8.com/color/96/youtube-play.png" width="48" alt="YouTube" /></a>
+  <a href="https://whisper-ai-transcription.vercel.app/">Whisper Transcribe</a> ·
+  <a href="https://vibehub-liard.vercel.app/">VibeHub</a> ·
+  <a href="https://github.com/tanmayai23?tab=repositories">All repositories ↗</a>
+</p>
+
+---
+
+### `02 / FIELD NOTES`
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <h2>TOP 25</h2>
+      <sub>Hack For Green Bharat</sub>
+      <br><sub>among 400+ teams, as reported</sub>
+    </td>
+    <td align="center" width="33%">
+      <h2>96.82%</h2>
+      <sub>Traffic-sign CNN accuracy</sub>
+      <br><sub>project-reported result</sub>
+    </td>
+    <td align="center" width="33%">
+      <h2>421</h2>
+      <sub>Passing tests</sub>
+      <br><sub>CALL-E / Market Buddy project-reported result</sub>
+    </td>
+  </tr>
+</table>
+
+I care about outcomes that can be inspected: a deployed product, a reproducible experiment, a useful evaluation, a passing test suite, or a clear explanation of what failed and what changed.
+
+---
+
+### `03 / THE TOOLKIT`
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=python,typescript,javascript,react,nextjs,nodejs,fastapi,flask,git,github,docker,aws,gcp&perline=7" alt="Python, TypeScript, JavaScript, React, Next.js, Node.js, FastAPI, Flask, Git, GitHub, Docker, AWS, Google Cloud">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/GenAI-LLMs%20%7C%20RAG%20%7C%20Agents-8B1E2D?style=flat-square" alt="Generative AI">
+  <img src="https://img.shields.io/badge/NLP-Transformers%20%7C%20Whisper-8B1E2D?style=flat-square" alt="NLP">
+  <img src="https://img.shields.io/badge/ML-PyTorch%20%7C%20TensorFlow%20%7C%20OpenCV-8B1E2D?style=flat-square" alt="Machine learning">
+  <img src="https://img.shields.io/badge/Data-SQL%20%7C%20Vector%20Search-8B1E2D?style=flat-square" alt="Data">
+</p>
+
+My current focus is not collecting tools. It is learning where each tool fits, how to evaluate its output, and how to make the full system reliable.
+
+---
+
+### `04 / BUILD LOG`
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/build-log-dark.svg">
+  <img src="./assets/build-log-light.svg" alt="Build log: explore the work, read the code, test the claims, improve the system." width="100%">
+</picture>
+
+- **Problem first:** Define the user, constraint, and success metric before choosing a model.
+- **Prototype fast:** Build the smallest end-to-end path that tests the core assumption.
+- **Measure honestly:** Track latency, failure cases, quality, and cost—not just a happy-path demo.
+- **Ship and iterate:** Document trade-offs and keep improving after the first deployment.
+
+---
+
+### `05 / THE HUMAN BEHIND THE SYSTEM`
+
+I like ambitious problems, small teams with high ownership, and people who challenge assumptions with evidence. I don't believe every idea needs an AI model; I believe every system should earn its complexity.
+
+**If you're building something consequential with AI, let's compare notes.**
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/LET'S_CONNECT-8B1E2D?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect on LinkedIn"></a>
+  <a href="https://www.tanmaykala.dev/"><img src="https://img.shields.io/badge/VIEW_MY_WORK-101827?style=for-the-badge&logo=vercel&logoColor=white" alt="View portfolio"></a>
+  <a href="mailto:tanmaykala171206@gmail.com"><img src="https://img.shields.io/badge/EMAIL_ME-101827?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Tanmay"></a>
+</p>
+
+<p align="center">
+  <sub>THE GHOST PROTOCOL · Stay curious. Build with intent. Leave evidence.</sub>
 </p>
