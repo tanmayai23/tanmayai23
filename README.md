@@ -7,8 +7,8 @@
 
 <br>
 
-<a href="https://www.tanmaykala.dev/"><img src="https://img.shields.io/badge/PORTFOLIO-5145FF?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio"></a>
-<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/LINKEDIN-111044?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+<a href="https://www.tanmaykala.dev/"><img src="https://img.shields.io/badge/PORTFOLIO-5145FF?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkgM2g2YTIgMiAwIDAgMSAyIDJ2MmgzYTIgMiAwIDAgMSAyIDJ2My41SDJWOWEyIDIgMCAwIDEgMi0yaDNWNWEyIDIgMCAwIDEgMi0yem0wIDRoNlY1SDl2MnpNMiAxNGg4djEuNWExIDEgMCAwIDAgMSAxaDJhMSAxIDAgMCAwIDEtMVYxNGg4djVhMiAyIDAgMCAxLTIgMkg0YTIgMiAwIDAgMS0yLTJ2LTV6Ii8%2BPC9zdmc%2B" alt="Portfolio"></a>
+<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTIwLjQ0NyAyMC40NTJoLTMuNTU0di01LjU2OWMwLTEuMzI4LS4wMjctMy4wMzctMS44NTItMy4wMzctMS44NTMgMC0yLjEzNiAxLjQ0NS0yLjEzNiAyLjkzOXY1LjY2N0g5LjM1MVY5aDMuNDE0djEuNTYxaC4wNDZjLjQ3Ny0uOSAxLjYzNy0xLjg1IDMuMzctMS44NSAzLjYwMSAwIDQuMjY3IDIuMzcgNC4yNjcgNS40NTV2Ni4yODZ6TTUuMzM3IDcuNDMzYTIuMDYyIDIuMDYyIDAgMSAxIDAtNC4xMjUgMi4wNjIgMi4wNjIgMCAwIDEgMCA0LjEyNXpNNy4xMTkgMjAuNDUySDMuNTU1VjloMy41NjR2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43Mjl2MjAuNTQyQzAgMjMuMjI3Ljc5MiAyNCAxLjc3MSAyNGgyMC40NTFDMjMuMiAyNCAyNCAyMy4yMjcgMjQgMjIuMjcxVjEuNzI5QzI0IC43NzQgMjMuMiAwIDIyLjIyMiAwaC4wMDN6Ii8%2BPC9zdmc%2B" alt="LinkedIn"></a>
 <a href="https://github.com/tanmayai23"><img src="https://img.shields.io/badge/OPEN_SOURCE-111044?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 <a href="mailto:tanmaykala171206@gmail.com"><img src="https://img.shields.io/badge/CONTACT-8B102B?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
 
@@ -108,11 +108,7 @@ I like ambitious problems, small teams with high ownership, and people who chall
 **If you're building something consequential with AI, let's compare notes.**
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/LET%27S_CONNECT-8B102B?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect on LinkedIn"></a>
-  <a href="https://www.tanmaykala.dev/"><img src="https://img.shields.io/badge/VIEW_MY_WORK-5145FF?style=for-the-badge&logo=vercel&logoColor=white" alt="View portfolio"></a>
-  <a href="mailto:tanmaykala171206@gmail.com"><img src="https://img.shields.io/badge/EMAIL_ME-111044?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Tanmay"></a>
-</p>
-
-<p align="center">
-  <sub>THE GHOST PROTOCOL · Stay curious. Build with intent. Leave evidence.</sub>
+  <a href="https://www.linkedin.com/in/tanmay-kala/"><img src="https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTIwLjQ0NyAyMC40NTJoLTMuNTU0di01LjU2OWMwLTEuMzI4LS4wMjctMy4wMzctMS44NTItMy4wMzctMS44NTMgMC0yLjEzNiAxLjQ0NS0yLjEzNiAyLjkzOXY1LjY2N0g5LjM1MVY5aDMuNDE0djEuNTYxaC4wNDZjLjQ3Ny0uOSAxLjYzNy0xLjg1IDMuMzctMS44NSAzLjYwMSAwIDQuMjY3IDIuMzcgNC4yNjcgNS40NTV2Ni4yODZ6TTUuMzM3IDcuNDMzYTIuMDYyIDIuMDYyIDAgMSAxIDAtNC4xMjUgMi4wNjIgMi4wNjIgMCAwIDEgMCA0LjEyNXpNNy4xMTkgMjAuNDUySDMuNTU1VjloMy41NjR2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43Mjl2MjAuNTQyQzAgMjMuMjI3Ljc5MiAyNCAxLjc3MSAyNGgyMC40NTFDMjMuMiAyNCAyNCAyMy4yMjcgMjQgMjIuMjcxVjEuNzI5QzI0IC43NzQgMjMuMiAwIDIyLjIyMiAwaC4wMDN6Ii8%2BPC9zdmc%2B" alt="Connect on LinkedIn"></a>
+  <a href="https://www.tanmaykala.dev/"><img src="https://img.shields.io/badge/Portfolio-5145FF?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkgM2g2YTIgMiAwIDAgMSAyIDJ2MmgzYTIgMiAwIDAgMSAyIDJ2My41SDJWOWEyIDIgMCAwIDEgMi0yaDNWNWEyIDIgMCAwIDEgMi0yem0wIDRoNlY1SDl2MnpNMiAxNGg4djEuNWExIDEgMCAwIDAgMSAxaDJhMSAxIDAgMCAwIDEtMVYxNGg4djVhMiAyIDAgMCAxLTIgMkg0YTIgMiAwIDAgMS0yLTJ2LTV6Ii8%2BPC9zdmc%2B" alt="Portfolio"></a>
+  <a href="mailto:tanmaykala171206@gmail.com"><img src="https://img.shields.io/badge/Email_me-111044?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Tanmay"></a>
 </p>
