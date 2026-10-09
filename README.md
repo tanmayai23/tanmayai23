@@ -44,48 +44,12 @@ I work at the intersection of applied AI and product engineering: turning models
   <a href="https://swachhvan.vercel.app/"><strong>OPEN LIVE PRODUCT ↗</strong></a>
 </p>
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>01. Hey Dude</h3>
-      <p><strong>Voice-first desktop assistant</strong></p>
-      Voice interaction, Gemini-powered conversation, face recognition, hotword detection, and desktop automation.
-      <br><br>
-      <sub>Python · Gemini · OpenCV · SQLite</sub>
-      <br><br>
-      <a href="https://github.com/tanmayai23/Hey-Dude-Voice-Assistant">Inspect the repository ↗</a>
-    </td>
-    <td width="50%" valign="top">
-      <h3>02. Market Buddy / CALL-E</h3>
-      <p><strong>Autonomous voice-agent experience</strong></p>
-      A hackathon build focused on conversational workflows and dependable behavior, with 421 passing tests reported for the project.
-      <br><br>
-      <sub>Agents · TypeScript · Testing</sub>
-      <br><br>
-      <a href="https://github.com/tanmayai23/CALL-E-Hackathon">Inspect the repository ↗</a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>03. TrafficSignNet</h3>
-      <p><strong>Computer vision classification</strong></p>
-      CNN-based traffic-sign recognition across 43 classes, with 96.82% accuracy reported for the model.
-      <br><br>
-      <sub>Python · CNN · Computer Vision</sub>
-      <br><br>
-      <a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition">Inspect the repository ↗</a>
-    </td>
-    <td width="50%" valign="top">
-      <h3>04. Hey, where next?</h3>
-      <p><strong>AI Travel Assist</strong></p>
-      Location-aware travel discovery designed to surface interesting places along a journey and help travelers decide what to explore.
-      <br><br>
-      <sub>Python · Gemini API · Geolocation</sub>
-      <br><br>
-      <a href="https://aitravelassist.vercel.app/">Open live product ↗</a>
-    </td>
-  </tr>
-</table>
+<p align="center">
+<a href="https://github.com/tanmayai23/Hey-Dude-Voice-Assistant"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/op-heydude-dark.svg"><img src="./assets/op-heydude-light.svg" alt="Case file 02 — Hey Dude, voice-first desktop assistant" width="49%"></picture></a>
+<a href="https://github.com/tanmayai23/CALL-E-Hackathon"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/op-marketbuddy-dark.svg"><img src="./assets/op-marketbuddy-light.svg" alt="Case file 03 — Market Buddy / CALL-E, autonomous voice agent, 421 passing tests" width="49%"></picture></a>
+<a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/op-trafficsign-dark.svg"><img src="./assets/op-trafficsign-light.svg" alt="Case file 04 — TrafficSignNet, 43-class CNN, 96.82% accuracy" width="49%"></picture></a>
+<a href="https://aitravelassist.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/op-travel-dark.svg"><img src="./assets/op-travel-light.svg" alt="Case file 05 — Hey, where next? AI Travel Assist" width="49%"></picture></a>
+</p>
 
 <p align="center">
   <a href="https://whisper-ai-transcription.vercel.app/">Whisper Transcribe</a> ·
@@ -97,25 +61,10 @@ I work at the intersection of applied AI and product engineering: turning models
 
 ### `02 / FIELD NOTES`
 
-<table>
-  <tr>
-    <td align="center" width="33%">
-      <h2>TOP 25</h2>
-      <sub>Hack For Green Bharat</sub>
-      <br><sub>among 400+ teams, as reported</sub>
-    </td>
-    <td align="center" width="33%">
-      <h2>96.82%</h2>
-      <sub>Traffic-sign CNN accuracy</sub>
-      <br><sub>project-reported result</sub>
-    </td>
-    <td align="center" width="33%">
-      <h2>421</h2>
-      <sub>Passing tests</sub>
-      <br><sub>CALL-E / Market Buddy project-reported result</sub>
-    </td>
-  </tr>
-</table>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/field-notes-dark.svg">
+  <img src="./assets/field-notes-light.svg" alt="Field notes: Top 25 of 400+ teams at Hack For Green Bharat, 96.82% traffic-sign CNN accuracy, 421 passing tests in CALL-E / Market Buddy" width="100%">
+</picture>
 
 I care about outcomes that can be inspected: a deployed product, a reproducible experiment, a useful evaluation, a passing test suite, or a clear explanation of what failed and what changed.
 

@@ -254,13 +254,156 @@ def build_log(T):
     return svg(W, H, body, css, sheet_defs(T, W, H),
                "Build log: explore the work, read the code, test the claims, improve the system.")
 
+# ======================================================= OPERATION CARDS
+OPS = [
+    dict(slug="heydude", no="02", tag="VOICE AI", title="Hey Dude", sub="VOICE-FIRST DESKTOP ASSISTANT",
+         desc=["Voice, Gemini-powered conversation, face", "recognition, hotword detection, automation."],
+         metric="<500 ms hotword · 15-day build", tech="Python · Gemini · OpenCV · SQLite", cta="INSPECT REPO", live=False, viz="wave"),
+    dict(slug="marketbuddy", no="03", tag="AGENTIC AI", title="Market Buddy", sub="AUTONOMOUS VOICE AGENT · CALL-E",
+         desc=["Hackathon voice agent built for dependable", "conversational workflows."],
+         metric="421 passing tests", tech="Agents · TypeScript · Testing", cta="INSPECT REPO", live=False, viz="agent"),
+    dict(slug="trafficsign", no="04", tag="COMPUTER VISION", title="TrafficSignNet", sub="CNN CLASSIFICATION · 43 CLASSES",
+         desc=["Traffic-sign recognition CNN built from", "scratch in PyTorch, CPU-only, CLI-driven."],
+         metric="96.82% test accuracy", tech="Python · CNN · Computer Vision", cta="INSPECT REPO", live=False, viz="grid"),
+    dict(slug="travel", no="05", tag="NLP · GEO", title="Hey, where next?", sub="AI TRAVEL ASSIST",
+         desc=["Location-aware discovery that surfaces", "interesting places along your journey."],
+         metric="POIs within a 10 km radius", tech="Python · Gemini API · Geolocation", cta="OPEN LIVE", live=True, viz="route"),
+]
+
+
+def viz(T, kind, cx, cy):
+    if kind == "wave":
+        bars = "".join(
+            f'<rect x="{cx-66 + i*10}" y="{cy-34}" width="5" height="68" rx="2.5" fill="{T["blue2"] if i % 3 else T["red"]}" '
+            f'class="eq"{dl(-((i*.13) % 1.1))}/>' for i in range(14))
+        return (f'<circle cx="{cx}" cy="{cy}" r="58" fill="none" stroke="{T["line"]}" stroke-dasharray="2 6"/>{bars}'
+                f'<text x="{cx}" y="{cy+76}" text-anchor="middle" class="mono" font-size="10.5" letter-spacing="2" fill="{T["muted"]}">"HEY DUDE…"</text>')
+    if kind == "agent":
+        sat = [(-58, -40, "call"), (58, -40, "plan"), (-58, 40, "tool"), (58, 40, "log")]
+        edges = "".join(f'<line x1="{cx}" y1="{cy}" x2="{cx+dx}" y2="{cy+dy}" stroke="{T["line"]}" stroke-width="2"/>' for dx, dy, _ in sat)
+        dots = "".join(
+            f'<circle r="3.5" fill="{T["red"] if i % 2 else T["blue2"]}"><animateMotion dur="{1.6 + i*.3:.1f}s" repeatCount="indefinite" '
+            f'path="M{cx},{cy} L{cx+dx},{cy+dy}"/></circle>' for i, (dx, dy, _) in enumerate(sat))
+        nodes = "".join(
+            f'<circle cx="{cx+dx}" cy="{cy+dy}" r="15" fill="{T["panel"]}" stroke="{T["blue2"]}" stroke-width="1.6"/>'
+            f'<text x="{cx+dx}" y="{cy+dy+3.5}" text-anchor="middle" class="mono" font-size="9.5" fill="{T["soft"]}">{n}</text>' for dx, dy, n in sat)
+        return (edges + dots + nodes +
+                f'<circle cx="{cx}" cy="{cy}" r="22" fill="{T["red"]}" class="ping"/><circle cx="{cx}" cy="{cy}" r="22" fill="{T["red2"]}" stroke="{T["red"]}" stroke-width="2"/>'
+                f'<text x="{cx}" y="{cy+4}" text-anchor="middle" class="mono" font-size="11" font-weight="800" fill="#fff">LLM</text>')
+    if kind == "grid":
+        cs, g, n = 14, 4, 7
+        w = n*cs + (n-1)*g
+        x0, y0 = cx - w/2, cy - w/2 - 6
+        cells = "".join(
+            f'<rect x="{x0 + (k % n)*(cs+g):.1f}" y="{y0 + (k//n)*(cs+g):.1f}" width="{cs}" height="{cs}" rx="3" '
+            f'fill="{T["blue2"] if k < 43 else "none"}" fill-opacity="{.25 + .6*((k*37) % 10)/10:.2f}" stroke="{T["line"]}"/>'
+            for k in range(n*n))
+        return (f'<defs><clipPath id="gc"><rect x="{x0}" y="{y0}" width="{w}" height="{w}"/></clipPath></defs>{cells}'
+                f'<g clip-path="url(#gc)"><rect x="{x0-30}" y="{y0}" width="24" height="{w}" fill="{T["red"]}" fill-opacity=".45" class="sweep"/></g>'
+                f'<text x="{cx}" y="{y0 + w + 20}" text-anchor="middle" class="mono" font-size="10.5" letter-spacing="2" fill="{T["muted"]}">43 CLASSES</text>')
+    d = f"M{cx-62},{cy+40} C{cx-30},{cy+40} {cx-40},{cy-10} {cx},{cy-6} S{cx+30},{cy-50} {cx+60},{cy-42}"
+    pins = "".join(f'<circle cx="{x}" cy="{y}" r="5" fill="{T["red"]}"/><circle cx="{x}" cy="{y}" r="5" fill="{T["red"]}" class="ping"{dl(i*.6)}/>'
+                   for i, (x, y) in enumerate([(cx-22, cy+18), (cx+18, cy-22), (cx+48, cy-8)]))
+    return (f'<circle cx="{cx}" cy="{cy}" r="56" fill="{T["blue"]}" fill-opacity=".07" stroke="{T["blue2"]}" stroke-dasharray="3 5"/>'
+            f'<path d="{d}" fill="none" stroke="{T["blue2"]}" stroke-width="2.5" stroke-dasharray="6 5"/>{pins}'
+            f'<circle r="6" fill="{T["text"]}" stroke="{T["blue2"]}" stroke-width="2.5"><animateMotion dur="4s" repeatCount="indefinite" path="{d}"/></circle>'
+            f'<text x="{cx}" y="{cy+76}" text-anchor="middle" class="mono" font-size="10.5" letter-spacing="2" fill="{T["muted"]}">10 KM RADIUS</text>')
+
+
+def op_card(T, p):
+    W, H = 592, 290
+    css = """
+  .eq { animation: eq 1.1s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+  @keyframes eq { from { transform: scaleY(.18); } to { transform: scaleY(1); } }
+  .sweep { animation: sweep 3s ease-in-out infinite; }
+  @keyframes sweep { 0% { transform: translateX(0); } 100% { transform: translateX(160px); } }
+"""
+    status = (f'<tspan fill="{T["green"]}">● </tspan>DEPLOYED · <tspan fill="{T["green"]}">LIVE</tspan>' if p["live"]
+              else f'<tspan fill="{T["blue2"]}">● </tspan>SOURCE · <tspan fill="{T["blue2"]}">OPEN</tspan>')
+    mw = len(p["metric"]) * 7.4 + 30
+    cw = len(p["cta"]) * 8.4 + 52
+    desc = "".join(f'<text x="40" y="{176 + i*21}" class="sans" font-size="14.5" fill="{T["soft"]}">{e(t)}</text>' for i, t in enumerate(p["desc"]))
+    mcol = T["blue2"] if T["name"] == "light" else T["text"]
+    body = f"""
+{frame(T, W, H, f"CASE FILE {p['no']}  ·  {p['tag']}", "")}
+<text x="{W-40}" y="44" text-anchor="end" class="mono" font-size="12" letter-spacing="2" fill="{T['muted']}">{status}</text>
+<text x="{W-24}" y="{H-18}" text-anchor="end" class="cond" font-size="170" font-weight="700" fill="{T['text']}" fill-opacity=".045">{p['no']}</text>
+<g class="rise"{dl(.1)}><text x="38" y="112" class="cond" font-size="38" font-weight="700" letter-spacing=".5" fill="{T['text']}">{e(p['title'])}</text></g>
+<g class="rise"{dl(.2)}><rect x="40" y="128" width="28" height="3" fill="{T['red']}"/>
+  <text x="78" y="134" class="mono" font-size="11" letter-spacing="2" fill="{T['red']}">{e(p['sub'])}</text></g>
+<g class="rise"{dl(.3)}>{desc}</g>
+<g class="rise"{dl(.4)}><rect x="40" y="208" width="{mw:.0f}" height="26" rx="13" fill="{T['blue']}" fill-opacity=".14" stroke="{T['blue2']}" stroke-opacity=".6"/>
+  <text x="{40 + mw/2:.0f}" y="225.5" text-anchor="middle" class="mono" font-size="12" font-weight="700" fill="{mcol}">{e(p['metric'])}</text></g>
+<text x="40" y="{H-34}" class="mono" font-size="11.5" fill="{T['muted']}">{e(p['tech'])}</text>
+<g class="rise"{dl(.5)}><rect x="{W-40-cw:.0f}" y="{H-56}" width="{cw:.0f}" height="32" rx="4" fill="{T['red2']}" stroke="{T['red']}"/>
+  <text x="{W-40-cw/2:.0f}" y="{H-35}" text-anchor="middle" class="mono" font-size="12" font-weight="800" letter-spacing="2" fill="#fff">{e(p['cta'])} ↗</text></g>
+<g class="rise"{dl(.35)}>{viz(T, p['viz'], 478, 140)}</g>
+"""
+    return svg(W, H, body, css, sheet_defs(T, W, H), f"{p['title']} — {p['sub'].title()}")
+
+
+# ========================================================== FIELD NOTES
+def field_notes(T):
+    W, H = 1200, 312
+    tw, g, y0, th = (1200 - 80 - 32) / 3, 16, 80, 204
+    circ = 2 * math.pi * 40
+    css = f"""
+  .slide {{ animation: slide 1.8s cubic-bezier(.2,.7,.2,1) .4s both; }}
+  @keyframes slide {{ from {{ transform: translateX(260px); opacity: 0; }} to {{ transform: none; opacity: 1; }} }}
+  .ring {{ animation: ring 2s cubic-bezier(.3,.7,.2,1) .4s both; }}
+  @keyframes ring {{ from {{ stroke-dashoffset: {circ:.1f}; }} }}
+  .tick {{ animation: tick .25s ease-out both; }}
+  @keyframes tick {{ from {{ opacity: .12; }} to {{ opacity: 1; }} }}
+"""
+    tiles = []
+    for i, (num, label, sub, col) in enumerate([
+            ("TOP 25", "Hack For Green Bharat", "among 400+ teams, as reported", "red"),
+            ("96.82%", "Traffic-sign CNN accuracy", "project-reported result", "blue2"),
+            ("421", "Passing tests", "CALL-E / Market Buddy, project-reported", "red")]):
+        x = 40 + i * (tw + g)
+        tiles.append(f'<g class="rise"{dl(.1 + i*.15)}><rect x="{x:.1f}" y="{y0}" width="{tw:.1f}" height="{th}" rx="10" fill="{T["panel"]}" stroke="{T["line"]}"/>'
+                     f'<rect x="{x:.1f}" y="{y0}" width="4" height="{th}" fill="{T[col]}"/>'
+                     f'<text x="{x+26:.1f}" y="{y0+36}" class="mono" font-size="11" letter-spacing="2.5" fill="{T["muted"]}">EVIDENCE {i+1:02d}</text>'
+                     f'<text x="{x+24:.1f}" y="{y0+94}" class="cond" font-size="58" font-weight="700" fill="{T["text"]}">{num}</text>'
+                     f'<text x="{x+26:.1f}" y="{y0+120}" class="sans" font-size="15" font-weight="700" fill="{T["text"]}">{e(label)}</text>'
+                     f'<text x="{x+26:.1f}" y="{y0+140}" class="sans" font-size="12.5" fill="{T["muted"]}">{e(sub)}</text></g>')
+    # tile 1: rank bar with marker at #25 of 400
+    x = 40
+    bx, bw, by = x + 26, tw - 52, y0 + 160
+    segs = "".join(f'<rect x="{bx + k*bw/80:.1f}" y="{by}" width="{bw/80 - 1.2:.1f}" height="10" rx="1.5" fill="{T["muted"]}" fill-opacity="{.7 if k < 5 else .2}"/>' for k in range(80))
+    mx = bx + bw * 25 / 400
+    tiles.append(f'<g>{segs}<g class="slide"><path d="M{mx:.1f},{by+14} l-6,10 h12 Z" fill="{T["red"]}"/>'
+                 f'<text x="{mx + 12:.1f}" y="{by+25}" class="mono" font-size="10.5" font-weight="800" fill="{T["red"]}">#25 · TOP 6%</text></g>'
+                 f'<text x="{bx+bw:.1f}" y="{by+25}" text-anchor="end" class="mono" font-size="10" fill="{T["muted"]}">400+ TEAMS</text></g>')
+    # tile 2: accuracy ring
+    x = 40 + tw + g
+    rcx, rcy, r = x + tw - 66, y0 + 82, 40
+    tiles.append(f'<circle cx="{rcx:.1f}" cy="{rcy}" r="{r}" fill="none" stroke="{T["line"]}" stroke-width="9"/>'
+                 f'<circle cx="{rcx:.1f}" cy="{rcy}" r="{r}" fill="none" stroke="{T["blue2"]}" stroke-width="9" stroke-linecap="round" '
+                 f'stroke-dasharray="{circ:.1f}" stroke-dashoffset="{circ*(1-.9682):.1f}" transform="rotate(-90 {rcx:.1f} {rcy})" class="ring"/>'
+                 f'<text x="{rcx:.1f}" y="{rcy+4}" text-anchor="middle" class="mono" font-size="14" font-weight="800" fill="{T["text"]}">43</text>'
+                 f'<text x="{rcx:.1f}" y="{rcy+18}" text-anchor="middle" class="mono" font-size="8.5" fill="{T["muted"]}">CLASSES</text>')
+    # tile 3: test ticks lighting up
+    x = 40 + 2 * (tw + g)
+    tx0, ty0 = x + 26, y0 + 158
+    ticks = "".join(f'<rect x="{tx0 + (k % 16)*12.5:.1f}" y="{ty0 + (k//16)*14}" width="10" height="10" rx="2.5" fill="{T["green"]}" class="tick"{dl(.5 + k*.04)}/>' for k in range(32))
+    tiles.append(ticks + f'<text x="{x + tw - 26:.1f}" y="{ty0 + 9}" text-anchor="end" class="mono" font-size="10" font-weight="700" fill="{T["green"]}">✓ ALL PASSING</text>')
+    body = f"""
+{frame(T, W, H, "FIELD NOTES  ·  EVIDENCE LOG", "")}
+<text x="{W-40}" y="44" text-anchor="end" class="mono" font-size="12" letter-spacing="2" fill="{T['muted']}">VERIFY, DON&#8217;T TRUST <tspan fill="{T['red']}">◆</tspan></text>
+{''.join(tiles)}
+"""
+    return svg(W, H, body, css, sheet_defs(T, W, H), "Field notes: Top 25 of 400+ teams, 96.82% CNN accuracy, 421 passing tests")
+
 
 if __name__ == "__main__":
     for old in OUT.glob("*.svg"):
         old.unlink()
     print("Building assets:")
     for T in (DARK, LIGHT):
-        for name, fn in [("ghost-protocol", hero), ("project-swachhvan", swachhvan), ("build-log", build_log)]:
+        jobs = [("ghost-protocol", hero), ("project-swachhvan", swachhvan), ("build-log", build_log), ("field-notes", field_notes)]
+        jobs += [(f"op-{p['slug']}", (lambda T, p=p: op_card(T, p))) for p in OPS]
+        for name, fn in jobs:
             f = OUT / f"{name}-{T['name']}.svg"
             f.write_text(fn(T), encoding="utf-8")
             print(f"  assets/{f.name}")
