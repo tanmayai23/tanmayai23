@@ -2,10 +2,11 @@
 
 <img src="./assets/hello/hero.svg" alt="Hello World, I'm Tanmay — GenAI & NLP engineer, founder of NAXATRA AI, CS at VIT Bhopal" width="100%">
 
-<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="./assets/hello/connect-linkedin.svg" alt="LinkedIn — in/tanmay-kala" width="24%"></a>
-<a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/connect-email.svg" alt="Email — tanmaykala171206@gmail.com" width="24%"></a>
-<a href="https://www.tanmaykala.dev/"><img src="./assets/hello/connect-portfolio.svg" alt="Portfolio — tanmaykala.dev" width="24%"></a>
-<a href="https://github.com/tanmayai23"><img src="./assets/hello/connect-github.svg" alt="GitHub — @tanmayai23" width="24%"></a>
+<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="./assets/hello/dock-linkedin.svg" alt="LinkedIn — in/tanmay-kala" width="13%"></a>
+<a href="https://x.com/Tanmayai23"><img src="./assets/hello/dock-x.svg" alt="X — @Tanmayai23" width="13%"></a>
+<a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/dock-email.svg" alt="Email — tanmaykala171206@gmail.com" width="13%"></a>
+<a href="https://www.tanmaykala.dev/"><img src="./assets/hello/dock-portfolio.svg" alt="Portfolio — tanmaykala.dev" width="13%"></a>
+<a href="https://github.com/tanmayai23"><img src="./assets/hello/dock-github.svg" alt="GitHub — @tanmayai23" width="13%"></a>
 
 <br><br>
 
@@ -52,9 +53,10 @@
 
 <a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/footer.svg" alt="Let's connect — tanmaykala171206@gmail.com" width="100%"></a>
 
-<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="./assets/hello/connect-linkedin.svg" alt="LinkedIn" width="24%"></a>
-<a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/connect-email.svg" alt="Email" width="24%"></a>
-<a href="https://www.tanmaykala.dev/"><img src="./assets/hello/connect-portfolio.svg" alt="Portfolio" width="24%"></a>
-<a href="https://github.com/tanmayai23"><img src="./assets/hello/connect-github.svg" alt="GitHub" width="24%"></a>
+<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="./assets/hello/dock-linkedin.svg" alt="LinkedIn — in/tanmay-kala" width="13%"></a>
+<a href="https://x.com/Tanmayai23"><img src="./assets/hello/dock-x.svg" alt="X — @Tanmayai23" width="13%"></a>
+<a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/dock-email.svg" alt="Email — tanmaykala171206@gmail.com" width="13%"></a>
+<a href="https://www.tanmaykala.dev/"><img src="./assets/hello/dock-portfolio.svg" alt="Portfolio — tanmaykala.dev" width="13%"></a>
+<a href="https://github.com/tanmayai23"><img src="./assets/hello/dock-github.svg" alt="GitHub — @tanmayai23" width="13%"></a>
 
 </div>
