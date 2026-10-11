@@ -71,6 +71,9 @@ BASE_CSS = f"""
   @keyframes blink {{ 50% {{ opacity: 0; }} }}
   @keyframes drop {{ 0%,30% {{ opacity: 0; transform: translateY(0) scale(.4); }} 40% {{ opacity: 1; transform: translateY(0) scale(1); }}
                      85% {{ opacity: 1; transform: translateY(70px) scale(1,1.15); }} 100% {{ opacity: 0; transform: translateY(84px) scale(1.2,.6); }} }}
+  .fall {{ animation: fall 3.6s cubic-bezier(.55,0,.9,.5) infinite; transform-box: fill-box; transform-origin: center; }}
+  @keyframes fall {{ 0%,20% {{ opacity: 0; transform: translateY(0) scale(.6); }} 35% {{ opacity: 1; transform: translateY(6px) scale(1); }}
+                     80% {{ opacity: 1; transform: translateY(54px) scale(1,1.15); }} 92%,100% {{ opacity: 0; transform: translateY(64px) scale(1.3,.4); }} }}
   @keyframes breathe {{ 0%,100% {{ transform: scaleY(1); }} 50% {{ transform: scaleY(.55); }} }}
   @keyframes zoom {{ from {{ transform: scale(1); }} to {{ transform: scale(1.07); }} }}
   @keyframes ripple {{ 0% {{ opacity: .7; transform: scale(.2); }} 100% {{ opacity: 0; transform: scale(1.6); }} }}
@@ -257,15 +260,24 @@ def typed(text, x, y, size, w, fill, start, step, fam="sans", ls=0.0, accent_las
             f'letter-spacing="{ls}"{cls}>{"".join(spans)}</text>')
 
 
-def melting_terminal(*, window, prompt, line1, line2, pieces, status, drips, stars, label, H=600):
-    """The sketch's melting terminal card. Used for the header and, mirrored, for the footer."""
+def melting_terminal(*, window, prompt, line1, line2, pieces, status, drips, stars, label, H=600, flip=False):
+    """The sketch's melting terminal card. The header drips downward; the footer is flipped so its
+    drips rise from the top edge, with drops falling onto the tips (as in the second sketch)."""
     W = 1200
     x0, y0, x1, y1 = 40, 40, 1160, 420
     shape = melt_path(x0, y0, x1, y1, 30, drips)
     long_drips = sorted(drips, key=lambda d: -d[2])[:4]
-    drops = "".join(
-        f'<circle cx="{cx}" cy="{y1 + L + br + 8}" r="{br*.55:.1f}" fill="{c}" class="drop"{dl(i * .9)}/>'
-        for i, ((cx, _, L, br), c) in enumerate(zip(sorted(long_drips), GOOGLE)))
+    off = H - y1 - y0 if flip else 0  # content shift so the card sits below the upward drips
+    if flip:
+        drops = "".join(
+            f'<circle cx="{cx}" cy="{max(H - (y1 + L + br) - 66, br + 6)}" r="{br*.55:.1f}" fill="{c}" class="fall"{dl(i * .9)}/>'
+            for i, ((cx, _, L, br), c) in enumerate(zip(sorted(long_drips), GOOGLE)))
+        # stars outside the card mirror to the other side; glints inside move with the card
+        stars = [(x, H - y if (y > y1 or y < y0) else y + off, sz, c, d) for x, y, sz, c, d in stars]
+    else:
+        drops = "".join(
+            f'<circle cx="{cx}" cy="{y1 + L + br + 8}" r="{br*.55:.1f}" fill="{c}" class="drop"{dl(i * .9)}/>'
+            for i, ((cx, _, L, br), c) in enumerate(zip(sorted(long_drips), GOOGLE)))
 
     title_bar = (
         "".join(f'<circle cx="{78 + i*22}" cy="76" r="6.5" fill="{c}"/>' for i, c in enumerate(["#FF5F57", "#FEBC2E", "#28C840"]))
@@ -306,12 +318,12 @@ def melting_terminal(*, window, prompt, line1, line2, pieces, status, drips, sta
 </g>"""
 
     defs = f"""
-<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{WHITE}"/><stop offset=".55" stop-color="{SURFACE}"/><stop offset="1" stop-color="#EDEDF2"/></linearGradient>
+<linearGradient id="card" x1="0" y1="{1 if flip else 0}" x2="0" y2="{0 if flip else 1}"><stop offset="0" stop-color="{WHITE}"/><stop offset=".55" stop-color="{SURFACE}"/><stop offset="1" stop-color="#EDEDF2"/></linearGradient>
 <linearGradient id="tileSheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#1D1D1F" flood-opacity=".08"/></filter>"""
     body = f"""
-<g filter="url(#soft)"><path d="{shape}" fill="url(#card)" stroke="{HAIR}" stroke-width="1.5"/></g>
-{title_bar}{tile}{text}{badge}{drops}{sparkles(stars)}"""
+<g filter="url(#soft)"><path d="{shape}" fill="url(#card)" stroke="{HAIR}" stroke-width="1.5"{f' transform="translate(0,{H}) scale(1,-1)"' if flip else ""}/></g>
+<g transform="translate(0,{off})">{title_bar}{tile}{text}{badge}</g>{drops}{sparkles(stars)}"""
     return svg(W, H, body, label, defs=defs)
 
 
@@ -337,8 +349,8 @@ def footer():
         line1="Have an idea?", line2="Let's connect.",
         pieces=[[("tanmaykala171206@gmail.com", {"fill": INK, "w": 500})], [("in/tanmay-kala", {})],
                 [("@Tanmayai23", {})]],
-        status="Inbox open",
-        drips=[(170, 34, 52, 11), (410, 44, 104, 14), (470, 26, 38, 10), (760, 40, 82, 13), (985, 46, 120, 15)],
+        status="Inbox open", flip=True,
+        drips=[(170, 34, 52, 11), (410, 44, 90, 14), (470, 26, 38, 10), (760, 40, 72, 13), (985, 46, 96, 15)],
         stars=[(90, 500, 10, 1, .3), (300, 470, 7, 3, 1.1), (610, 505, 13, 0, 1.9), (880, 470, 8, 2, .6),
                (1110, 520, 11, 1, 2.3), (22, 280, 9, 0, 1.5), (1180, 120, 10, 3, .2), (540, 560, 6, 2, 2.6),
                (1180, 360, 6, 1, 1.0), (80, 18, 7, 2, .8), (560, 18, 5, 0, 1.6), (1100, 18, 8, 1, 2.0),
@@ -558,6 +570,24 @@ PROJECTS = [
 ]
 
 
+MORE = [("whisper", "Whisper Transcribe", "live demo", 0), ("vibehub", "VibeHub", "live demo", 1),
+        ("repos", "All repositories", "every project, open source", 3)]
+
+
+def link_card(title, sub, c):
+    """Compact link chip for smaller projects — sits under the project grid."""
+    W, H = 384, 96
+    body = f"""
+<rect x="4" y="4" width="{W-8}" height="{H-8}" rx="26" fill="{SURFACE}"/>
+<circle cx="50" cy="{H/2}" r="22" fill="{WHITE}" stroke="{HAIR}"/>
+{sparkle(50, H/2, 11, GOOGLE[c], c * .6, "spin")}
+{T(88, 45, title, 19, 600, INK, ls=-.4)}
+{T(88, 69, sub, 17, 400, MUTED, "serif")}
+{arrow(W - 44, H / 2, 17)}
+{sparkles([(W - 82, 22, 4, c + 1, 1.2 + c * .4)])}"""
+    return svg(W, H, body, f"{title} — {sub}")
+
+
 def project_flagship(p):
     W, H = 1200, 360
     mets = "".join(
@@ -668,6 +698,8 @@ if __name__ == "__main__":
     write(f"project-{PROJECTS[0]['slug']}.svg", project_flagship(PROJECTS[0]))
     for i, p in enumerate(PROJECTS[1:]):
         write(f"project-{p['slug']}.svg", project_card(p, i))
+    for slug, title, sub, c in MORE:
+        write(f"more-{slug}.svg", link_card(title, sub, c))
     for a in GALLERY:
         write(f"achievement-{a['no']}.svg", achievement(a))
     write("footer.svg", footer())

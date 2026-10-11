@@ -27,7 +27,9 @@
 <a href="https://github.com/tanmayai23/gtsrb-traffic-sign-recognition"><img src="./assets/hello/project-trafficsign.svg" alt="TrafficSignNet — 43-class CNN, 96.82% accuracy" width="49%"></a>
 <a href="https://aitravelassist.vercel.app/"><img src="./assets/hello/project-travel.svg" alt="Hey, where next? — AI travel assist" width="49%"></a>
 
-<sub><a href="https://whisper-ai-transcription.vercel.app/">Whisper Transcribe</a> &nbsp;·&nbsp; <a href="https://vibehub-liard.vercel.app/">VibeHub</a> &nbsp;·&nbsp; <a href="https://github.com/tanmayai23?tab=repositories">All repositories ↗</a></sub>
+<a href="https://whisper-ai-transcription.vercel.app/"><img src="./assets/hello/more-whisper.svg" alt="Whisper Transcribe — live demo" width="32%"></a>
+<a href="https://vibehub-liard.vercel.app/"><img src="./assets/hello/more-vibehub.svg" alt="VibeHub — live demo" width="32%"></a>
+<a href="https://github.com/tanmayai23?tab=repositories"><img src="./assets/hello/more-repos.svg" alt="All repositories" width="32%"></a>
 
 <br><br>
 
