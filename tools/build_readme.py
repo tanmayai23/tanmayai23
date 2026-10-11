@@ -36,10 +36,33 @@ if PREVIEW:
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------- tokens
-INK, INK2, MUTED, HAIR = "#1D1D1F", "#424245", "#6E6E73", "#E3E3E8"
-SURFACE, WHITE = "#F5F5F7", "#FFFFFF"
+# Every asset is built twice: name.svg (light) and name-dark.svg; the README picks one
+# with <picture> + prefers-color-scheme, following the viewer's GitHub theme.
+# WHITE is the "raised surface" token (white in light mode); PURE is always white.
+THEMES = {
+    "light": dict(INK="#1D1D1F", INK2="#424245", MUTED="#6E6E73", HAIR="#E3E3E8", SURFACE="#F5F5F7",
+                  WHITE="#FFFFFF", TILE="#1D1D1F", CARD=("#FFFFFF", "#F5F5F7", "#EDEDF2"),
+                  SHADOW=("#1D1D1F", .08), GOLD="#B07D00"),
+    "dark": dict(INK="#F5F5F7", INK2="#D0D7DE", MUTED="#8B949E", HAIR="#30363D", SURFACE="#161B22",
+                 WHITE="#21262D", TILE="#000000", CARD=("#21262D", "#161B22", "#10151C"),
+                 SHADOW=("#000000", .5), GOLD="#FBBC04"),
+}
+# module-level data (e.g. STACK) bakes light hexes in; the dark build swaps them after rendering
+DARK_SWAP = {"#1D1D1F": "#F5F5F7", "#B07D00": "#FBBC04", "#003B57": "#5BA7D1", "#5C3EE8": "#8C7BFF",
+             "#3776AB": "#5A9BD5", "#0A66C2": "#3D8BFD"}
+PURE = "#FFFFFF"
 BLUE, RED, YELLOW, GREEN = "#4285F4", "#EA4335", "#FBBC04", "#34A853"
 GOOGLE = [BLUE, RED, YELLOW, GREEN]
+THEME = "light"
+
+
+def set_theme(name):
+    global THEME
+    THEME = name
+    globals().update(THEMES[name])
+
+
+set_theme("light")
 
 STACKS = {
     "sans": "TKSans, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Inter, Roboto, Arial, sans-serif",
@@ -184,6 +207,9 @@ def svg(w, h, body, label, css="", defs=""):
     if PREVIEW:
         css += "* { animation: none !important; }"
         body = body.replace('visibility="hidden"', "")
+    if THEME == "dark":
+        for a, b in DARK_SWAP.items():
+            body, defs = body.replace(a, b), defs.replace(a, b)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'role="img" aria-label="{e(label)}"><title>{e(label)}</title>'
             f'<style>{font_css()}{BASE_CSS}{css}</style><defs>{defs}</defs>{body}</svg>\n')
@@ -228,7 +254,8 @@ def pill(x, y, text, fg, bg, size=13, pad=14, h=30, fam="sans", w=600, ls=0.0, s
             + T(x + pw / 2, y + h / 2 + size * .35, text, size, w, fg, fam, "middle", ls)), pw
 
 
-def arrow(cx, cy, r=18, bg=WHITE):
+def arrow(cx, cy, r=18, bg=None):
+    bg = bg or WHITE
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{bg}" stroke="{HAIR}"/>'
             f'<path d="M{cx-6},{cy+6} L{cx+6},{cy-6} M{cx-4},{cy-6} H{cx+6} V{cy+4}" fill="none" stroke="{INK}" '
             f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
@@ -286,9 +313,9 @@ def melting_terminal(*, window, prompt, line1, line2, pieces, status, drips, sta
 
     tile = f"""
 <g class="up"{dl(.1)}>
-  <rect x="96" y="168" width="156" height="156" rx="38" fill="{INK}"/>
+  <rect x="96" y="168" width="156" height="156" rx="38" fill="{TILE}" stroke="{HAIR}"/>
   <rect x="96" y="168" width="156" height="156" rx="38" fill="url(#tileSheen)"/>
-  <path d="M134,216 L163,242 L134,268" fill="none" stroke="{WHITE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M134,216 L163,242 L134,268" fill="none" stroke="{PURE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
   <rect x="176" y="258" width="42" height="10" rx="5" fill="{GREEN}" class="blink"/>
 </g>"""
 
@@ -318,9 +345,9 @@ def melting_terminal(*, window, prompt, line1, line2, pieces, status, drips, sta
 </g>"""
 
     defs = f"""
-<linearGradient id="card" x1="0" y1="{1 if flip else 0}" x2="0" y2="{0 if flip else 1}"><stop offset="0" stop-color="{WHITE}"/><stop offset=".55" stop-color="{SURFACE}"/><stop offset="1" stop-color="#EDEDF2"/></linearGradient>
+<linearGradient id="card" x1="0" y1="{1 if flip else 0}" x2="0" y2="{0 if flip else 1}"><stop offset="0" stop-color="{CARD[0]}"/><stop offset=".55" stop-color="{CARD[1]}"/><stop offset="1" stop-color="{CARD[2]}"/></linearGradient>
 <linearGradient id="tileSheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
-<filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#1D1D1F" flood-opacity=".08"/></filter>"""
+<filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="{SHADOW[0]}" flood-opacity="{SHADOW[1]}"/></filter>"""
     body = f"""
 <g filter="url(#soft)"><path d="{shape}" fill="url(#card)" stroke="{HAIR}" stroke-width="1.5"{f' transform="translate(0,{H}) scale(1,-1)"' if flip else ""}/></g>
 <g transform="translate(0,{off})">{title_bar}{tile}{text}{badge}</g>{drops}{sparkles(stars)}"""
@@ -667,8 +694,8 @@ def achievement(a):
   <rect x="{px}" y="{py + ph - 96}" width="{pw}" height="96" fill="url(#shade)"/>
 </g>
 <rect x="{px}" y="{py}" width="{pw}" height="{ph}" rx="22" fill="none" stroke="#000" stroke-opacity=".06"/>
-{T(px + 18, py + ph - 20, f"{a['no']} / 04", 12.5, 600, WHITE, "mono", ls=1)}
-{sparkles([(px + pw - 22, py + 26, 12, WHITE, .2), (px + pw - 46, py + 50, 5, WHITE, 1.3)])}
+{T(px + 18, py + ph - 20, f"{a['no']} / 04", 12.5, 600, PURE, "mono", ls=1)}
+{sparkles([(px + pw - 22, py + 26, 12, PURE, .2), (px + pw - 46, py + 50, 5, PURE, 1.3)])}
 <g class="up"{dl(.1)}>
   {sparkle(316, 64, 9, GOOGLE[c], 0)}
   {T(334, 69, a['org'], 11.5, 600, MUTED, "mono", ls=1.6)}
@@ -685,21 +712,24 @@ def achievement(a):
 
 
 if __name__ == "__main__":
-    print(f"Building {OUT}:")
-    write("hero.svg", hero())
-    for k in DOCK:
-        write(f"dock-{k}.svg", dock_tile(k))
-    write("about.svg", about())
-    for no, title, note in [("01", "About", "the short version"), ("02", "Tech stack", "tools I ship with"),
-                            ("03", "Projects", "selected work"), ("04", "Achievements", "moments worth framing"),
-                            ("05", "Commit graph", "the daily practice")]:
-        write(f"section-{no}.svg", section(no, title, note))
-    write("stack.svg", stack())
-    write(f"project-{PROJECTS[0]['slug']}.svg", project_flagship(PROJECTS[0]))
-    for i, p in enumerate(PROJECTS[1:]):
-        write(f"project-{p['slug']}.svg", project_card(p, i))
-    for slug, title, sub, c in MORE:
-        write(f"more-{slug}.svg", link_card(title, sub, c))
-    for a in GALLERY:
-        write(f"achievement-{a['no']}.svg", achievement(a))
-    write("footer.svg", footer())
+    for theme in ("light", "dark"):
+        set_theme(theme)
+        SUFFIX = "" if theme == "light" else "-dark"
+        print(f"Building {OUT} ({theme}):")
+        write(f"hero{SUFFIX}.svg", hero())
+        for k in DOCK:
+            write(f"dock-{k}{SUFFIX}.svg", dock_tile(k))
+        write(f"about{SUFFIX}.svg", about())
+        for no, title, note in [("01", "About", "the short version"), ("02", "Tech stack", "tools I ship with"),
+                                ("03", "Projects", "selected work"), ("04", "Achievements", "moments worth framing"),
+                                ("05", "Commit graph", "the daily practice")]:
+            write(f"section-{no}{SUFFIX}.svg", section(no, title, note))
+        write(f"stack{SUFFIX}.svg", stack())
+        write(f"project-{PROJECTS[0]['slug']}{SUFFIX}.svg", project_flagship(PROJECTS[0]))
+        for i, p in enumerate(PROJECTS[1:]):
+            write(f"project-{p['slug']}{SUFFIX}.svg", project_card(p, i))
+        for slug, title, sub, c in MORE:
+            write(f"more-{slug}{SUFFIX}.svg", link_card(title, sub, c))
+        for a in GALLERY:
+            write(f"achievement-{a['no']}{SUFFIX}.svg", achievement(a))
+        write(f"footer{SUFFIX}.svg", footer())
