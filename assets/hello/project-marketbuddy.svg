@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="340" viewBox="0 0 590 340" role="img" aria-label="Market Buddy — Autonomous voice agent · CALL-E · 421 passing tests"><title>Market Buddy — Autonomous voice agent · CALL-E · 421 passing tests</title><style>
+  text { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Google Sans', 'Segoe UI Variable Display', 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif; }
+  .mono { font-family: 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, 'Roboto Mono', monospace; }
+  .up { animation: up .9s cubic-bezier(.2,.8,.2,1) both; }
+  .fade { animation: fade 1.2s ease both; }
+  .twinkle { animation: twinkle 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .spin { animation: spin 14s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .blink { animation: blink 1.1s steps(1) infinite; }
+  .drop { animation: drop 3.6s cubic-bezier(.55,0,.9,.5) infinite; transform-box: fill-box; transform-origin: center top; }
+  .breathe { animation: breathe 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center top; }
+  .zoom { animation: zoom 18s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+  .ripple { animation: ripple 3.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes twinkle { 0%,100% { opacity: .25; transform: scale(.55) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(45deg); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes drop { 0%,30% { opacity: 0; transform: translateY(0) scale(.4); } 40% { opacity: 1; transform: translateY(0) scale(1); }
+                     85% { opacity: 1; transform: translateY(70px) scale(1,1.15); } 100% { opacity: 0; transform: translateY(84px) scale(1.2,.6); } }
+  @keyframes breathe { 0%,100% { transform: scaleY(1); } 40% { transform: scaleY(1.07); } }
+  @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.07); } }
+  @keyframes ripple { 0% { opacity: .7; transform: scale(.2); } 100% { opacity: 0; transform: scale(1.6); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style><defs></defs>
+<rect x="10" y="10" width="570" height="320" rx="28" fill="#F5F5F7"/>
+<g class="up"><rect x="36" y="40" width="102" height="26" rx="13.0" fill="#FFFFFF"/><text x="87" y="57.1" text-anchor="middle" font-size="11.5" font-weight="700" fill="#EA4335" class="mono">AGENTIC AI</text></g>
+<g class="up" style="animation-delay:0.10s"><text x="34" y="114" font-size="34" font-weight="700" letter-spacing="-1" fill="#1D1D1F">Market Buddy</text>
+<text x="36" y="142" font-size="15" fill="#6E6E73">Autonomous voice agent · CALL-E</text></g>
+<g class="up" style="animation-delay:0.20s"><text x="36" y="180" font-size="14.5" fill="#424245">Hackathon voice agent built for</text><text x="36" y="202" font-size="14.5" fill="#424245">dependable conversational workflows.</text></g>
+<g class="up" style="animation-delay:0.30s"><rect x="36" y="236" width="134" height="30" rx="15.0" fill="#1D1D1F"/><text x="103" y="255.7" text-anchor="middle" font-size="13" font-weight="600" fill="#FFFFFF">421 passing tests</text></g>
+<text x="36" y="298" class="mono" font-size="11.5" fill="#6E6E73">Agents · TypeScript · Testing</text>
+<g transform="translate(0,0)"><line x1="470" y1="120" x2="408" y2="78" stroke="#E3E3E8" stroke-width="3"/><line x1="470" y1="120" x2="532" y2="78" stroke="#E3E3E8" stroke-width="3"/><line x1="470" y1="120" x2="408" y2="162" stroke="#E3E3E8" stroke-width="3"/><line x1="470" y1="120" x2="532" y2="162" stroke="#E3E3E8" stroke-width="3"/><circle cx="470" cy="120" r="20" fill="#1D1D1F" class="" style="animation-delay:0.00s"/><circle cx="408" cy="78" r="13" fill="#4285F4" class="twinkle" style="animation-delay:0.40s"/><circle cx="532" cy="78" r="13" fill="#EA4335" class="twinkle" style="animation-delay:0.80s"/><circle cx="408" cy="162" r="13" fill="#FBBC04" class="twinkle" style="animation-delay:1.20s"/><circle cx="532" cy="162" r="13" fill="#34A853" class="twinkle" style="animation-delay:1.60s"/><text x="470" y="125" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#FFFFFF">AI</text></g>
+<circle cx="540" cy="290" r="18" fill="#FFFFFF" stroke="#E3E3E8"/>
+<path d="M534,296 L546,284 M536,284 H546 V294" fill="none" stroke="#1D1D1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
