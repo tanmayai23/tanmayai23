@@ -197,12 +197,15 @@ def sparkle(x, y, s, fill, delay=0.0, cls="twinkle"):
     return f'<g transform="translate({x},{y})"><path d="{d}" fill="{fill}" class="{cls}"{dl(delay)}/></g>'
 
 
+SPARKLE_SCALE = 1.6
+
+
 def sparkles(spots):
     """spots: [(x, y, size, colour_index_or_hex, delay)] — colour int picks a Google colour."""
     out = []
     for x, y, s, c, d in spots:
         col = GOOGLE[c % 4] if isinstance(c, int) else c
-        out.append(sparkle(x, y, s, col, d, "glint" if s <= 5 else "twinkle"))
+        out.append(sparkle(x, y, round(s * SPARKLE_SCALE, 1), col, d, "glint" if s <= 5 else "twinkle"))
     return "".join(out)
 
 
@@ -254,25 +257,19 @@ def typed(text, x, y, size, w, fill, start, step, fam="sans", ls=0.0, accent_las
             f'letter-spacing="{ls}"{cls}>{"".join(spans)}</text>')
 
 
-def hero():
-    W, H = 1200, 580
+def melting_terminal(*, window, prompt, line1, line2, pieces, status, drips, stars, label, H=600):
+    """The sketch's melting terminal card. Used for the header and, mirrored, for the footer."""
+    W = 1200
     x0, y0, x1, y1 = 40, 40, 1160, 420
-    drips = [(250, 46, 70, 15), (520, 38, 118, 13), (580, 26, 40, 10), (865, 44, 92, 14), (1060, 30, 46, 11)]
     shape = melt_path(x0, y0, x1, y1, 30, drips)
+    long_drips = sorted(drips, key=lambda d: -d[2])[:4]
     drops = "".join(
         f'<circle cx="{cx}" cy="{y1 + L + br + 8}" r="{br*.55:.1f}" fill="{c}" class="drop"{dl(i * .9)}/>'
-        for i, ((cx, _, L, br), c) in enumerate(zip([drips[0], drips[1], drips[3], drips[4]], GOOGLE)))
-    stars = sparkles([
-        (150, 490, 11, 0, 0), (395, 472, 7, 2, .8), (700, 492, 13, 1, 1.6), (980, 525, 8, 3, .4),
-        (1110, 490, 10, 0, 2.1), (22, 250, 9, 3, 1.2), (1180, 150, 10, 2, 2.6), (330, 545, 6, 1, 1.9),
-        (1180, 345, 6, 0, .6), (60, 20, 7, 1, 1.1), (640, 18, 5, 2, .3), (1120, 18, 8, 3, 1.7),
-        (790, 560, 5, 0, 2.4), (460, 520, 4, 3, 1.3), (1040, 460, 4, 2, .9),
-        # glints inside the card
-        (1060, 250, 9, 1, .5), (1110, 300, 5, 2, 1.8), (1000, 330, 6, 0, 2.8), (260, 352, 5, 3, 1.4)])
+        for i, ((cx, _, L, br), c) in enumerate(zip(sorted(long_drips), GOOGLE)))
 
     title_bar = (
         "".join(f'<circle cx="{78 + i*22}" cy="76" r="6.5" fill="{c}"/>' for i, c in enumerate(["#FF5F57", "#FEBC2E", "#28C840"]))
-        + T(600, 81, "tanmay — zsh — hello-world", 13, 500, MUTED, "mono", "middle")
+        + T(600, 81, window, 13, 500, MUTED, "mono", "middle")
         + f'<line x1="{x0}" y1="108" x2="{x1}" y2="108" stroke="{HAIR}"/>')
 
     tile = f"""
@@ -283,33 +280,29 @@ def hero():
   <rect x="176" y="258" width="42" height="10" rx="5" fill="{GREEN}" class="blink"/>
 </g>"""
 
-    t1, t2 = "Hello World,", "I'm Tanmay."
     s1 = .5
-    s2 = s1 + len(t1) * .09 + .35
-    end = s2 + len(t2) * .09
-    # subtitle pieces separated by small sparkles, laid out with measured widths
-    pieces = [[("GenAI & NLP Engineer", {})], [("Founder, ", {}), ("NAXATRA AI", {"fill": INK, "w": 600})],
-              [("CS @ VIT Bhopal", {})]]
+    s2 = s1 + len(line1) * .09 + .35
+    end = s2 + len(line2) * .09
+    # subtitle pieces separated by sparkles, laid out with measured widths
     sx, sub = 296, ""
     for i, runs in enumerate(pieces):
         if i:
-            sub += sparkle(sx + 17, 375, 6, GOOGLE[i], i * .7)
-            sx += 34
+            sub += sparkle(sx + 20, 375, 9, GOOGLE[i], i * .7)
+            sx += 40
         sub += T(sx, 382, runs, 19, 400, MUTED)
         sx += width(runs, 19)
     text = f"""
-{T(296, 172, '~ $ echo "$GREETING"', 15, 400, MUTED, "mono", cls="fade", extra=dl(.2))}
-{typed(t1, 292, 246, 84, 400, INK2, s1, .09, "serif", -1)}
-{typed(t2, 290, 330, 88, 700, INK, s2, .09, "sans", -4.2, accent_last=BLUE)}
+{T(296, 172, prompt, 15, 400, MUTED, "mono", cls="fade", extra=dl(.2))}
+{typed(line1, 292, 246, 84, 400, INK2, s1, .09, "serif", -1)}
+{typed(line2, 290, 330, 88, 700, INK, s2, .09, "sans", -4.2, accent_last=BLUE)}
 <g class="up"{dl(end + .45)}>{sub}</g>"""
 
-    label = "Open to internships"
-    bw = width(label, 13.5, 500) + 46
-    status = f"""
+    bw = width(status, 13.5, 500) + 46
+    badge = f"""
 <g class="fade"{dl(end + .8)}>
   <rect x="{1116 - bw:.1f}" y="140" width="{bw:.1f}" height="34" rx="17" fill="{WHITE}" stroke="{HAIR}"/>
   <circle cx="{1116 - bw + 20:.1f}" cy="157" r="5" fill="{GREEN}"/><circle cx="{1116 - bw + 20:.1f}" cy="157" r="5" fill="{GREEN}" class="ripple"/>
-  {T(1116 - bw + 34, 161.5, label, 13.5, 500, INK2)}
+  {T(1116 - bw + 34, 161.5, status, 13.5, 500, INK2)}
 </g>"""
 
     defs = f"""
@@ -318,8 +311,40 @@ def hero():
 <filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#1D1D1F" flood-opacity=".08"/></filter>"""
     body = f"""
 <g filter="url(#soft)"><path d="{shape}" fill="url(#card)" stroke="{HAIR}" stroke-width="1.5"/></g>
-{title_bar}{tile}{text}{status}{drops}{stars}"""
-    return svg(W, H, body, "Hello World, I'm Tanmay — GenAI & NLP engineer, founder of NAXATRA AI, CS at VIT Bhopal", defs=defs)
+{title_bar}{tile}{text}{badge}{drops}{sparkles(stars)}"""
+    return svg(W, H, body, label, defs=defs)
+
+
+def hero():
+    return melting_terminal(
+        window="tanmay — zsh — hello-world", prompt='~ $ echo "$GREETING"',
+        line1="Hello World,", line2="I'm Tanmay.",
+        pieces=[[("GenAI & NLP Engineer", {})], [("Founder, ", {}), ("NAXATRA AI", {"fill": INK, "w": 600})],
+                [("CS @ VIT Bhopal", {})]],
+        status="Open to internships",
+        drips=[(250, 46, 70, 15), (520, 38, 118, 13), (580, 26, 40, 10), (865, 44, 92, 14), (1060, 30, 46, 11)],
+        stars=[(150, 492, 11, 0, 0), (395, 472, 7, 2, .8), (700, 494, 13, 1, 1.6), (980, 528, 8, 3, .4),
+               (1110, 492, 10, 0, 2.1), (22, 250, 9, 3, 1.2), (1180, 150, 10, 2, 2.6), (330, 550, 6, 1, 1.9),
+               (1180, 345, 6, 0, .6), (60, 20, 7, 1, 1.1), (640, 18, 5, 2, .3), (1120, 18, 8, 3, 1.7),
+               (790, 566, 5, 0, 2.4), (460, 522, 4, 3, 1.3), (1040, 462, 4, 2, .9),
+               (1060, 250, 9, 1, .5), (1110, 300, 5, 2, 1.8), (1000, 330, 6, 0, 2.8), (262, 352, 5, 3, 1.4)],
+        label="Hello World, I'm Tanmay — GenAI & NLP engineer, founder of NAXATRA AI, CS at VIT Bhopal")
+
+
+def footer():
+    return melting_terminal(
+        window="tanmay — zsh — lets-connect", prompt="~ $ ./say-hello --to you",
+        line1="Have an idea?", line2="Let's connect.",
+        pieces=[[("tanmaykala171206@gmail.com", {"fill": INK, "w": 500})], [("in/tanmay-kala", {})],
+                [("@Tanmayai23", {})]],
+        status="Inbox open",
+        drips=[(170, 34, 52, 11), (410, 44, 104, 14), (470, 26, 38, 10), (760, 40, 82, 13), (985, 46, 120, 15)],
+        stars=[(90, 500, 10, 1, .3), (300, 470, 7, 3, 1.1), (610, 505, 13, 0, 1.9), (880, 470, 8, 2, .6),
+               (1110, 520, 11, 1, 2.3), (22, 280, 9, 0, 1.5), (1180, 120, 10, 3, .2), (540, 560, 6, 2, 2.6),
+               (1180, 360, 6, 1, 1.0), (80, 18, 7, 2, .8), (560, 18, 5, 0, 1.6), (1100, 18, 8, 1, 2.0),
+               (230, 566, 5, 3, 2.9), (1050, 455, 4, 0, .5), (700, 456, 4, 1, 1.3),
+               (1060, 250, 9, 2, .9), (1110, 305, 5, 0, 2.2), (995, 335, 6, 3, .4), (262, 352, 5, 1, 1.7)],
+        label="Have an idea? Let's connect — tanmaykala171206@gmail.com · LinkedIn in/tanmay-kala · X @Tanmayai23")
 
 
 # ================================================================== CONNECT DOCK
@@ -372,7 +397,7 @@ def section(no, title, note):
     tw_ = width(title, 44, 600, ls=-1.6)
     body = f"""
 <g class="up">
-  {sparkle(30, 58, 15, GOOGLE[c % 4], 0, "spin")}
+  {sparkle(30, 58, 20, GOOGLE[c % 4], 0, "spin")}
   {T(62, 74, title, 44, 600, INK, ls=-1.6)}
   {T(76 + tw_, 74, note, 27, 400, MUTED, "serif")}
   {T(1184, 70, f"{no} / 05", 13, 500, MUTED, "mono", "end", 1)}
@@ -391,7 +416,7 @@ def about():
            ("Leading", "NAXATRA AI — useful AI infrastructure for Bharat", 2),
            ("Open to", "AI/ML & GenAI internships, ambitious collaborators", 3)]
     rows = "".join(
-        f'<g class="up"{dl(.35 + i*.12)}>{sparkle(682, 118 + i*66, 7, GOOGLE[c], i*.6, "twinkle")}'
+        f'<g class="up"{dl(.35 + i*.12)}>{sparkle(680, 118 + i*66, 10, GOOGLE[c], i*.6, "twinkle")}'
         + T(700, 124 + i*66, k, 18, 600, INK, ls=-.2)
         + T(700, 149 + i*66, v, 16, 400, MUTED) + "</g>"
         for i, (k, v, c) in enumerate(now))
@@ -439,7 +464,7 @@ def stack():
         y = top + r * row_h
         if r:
             parts.append(f'<line x1="80" y1="{y-4}" x2="1120" y2="{y-4}" stroke="{HAIR}"/>')
-        parts.append(f'<g class="up"{dl(r*.1)}>{sparkle(88, y + 55, 7, GOOGLE[r], r * .5)}'
+        parts.append(f'<g class="up"{dl(r*.1)}>{sparkle(86, y + 55, 10, GOOGLE[r], r * .5)}'
                      + T(106, y + 61, cat, 18, 600, INK, ls=-.2) + "</g>")
         for i, (slug, name, col) in enumerate(items):
             x = 290 + i * 122
@@ -455,7 +480,7 @@ def stack():
     parts.append(T(1112, 140, "and always learning", 19, 400, MUTED, "serif", "end"))
     y = top + row_h * len(STACK) + 16
     parts.append(f'<line x1="80" y1="{y-4}" x2="1120" y2="{y-4}" stroke="{HAIR}"/>')
-    parts.append(f'<g class="up"{dl(.6)}>{sparkle(88, y + 39, 7, INK, .2)}' + T(106, y + 45, "Focus areas", 18, 600, INK, ls=-.2) + "</g>")
+    parts.append(f'<g class="up"{dl(.6)}>{sparkle(86, y + 39, 10, INK, .2)}' + T(106, y + 45, "Focus areas", 18, 600, INK, ls=-.2) + "</g>")
     x, yy = 290, y + 22
     for i, cap in enumerate(CAPS):
         w = width(cap, 14.5, 500) + 34
@@ -615,7 +640,7 @@ def achievement(a):
 {T(px + 18, py + ph - 20, f"{a['no']} / 04", 12.5, 600, WHITE, "mono", ls=1)}
 {sparkles([(px + pw - 22, py + 26, 12, WHITE, .2), (px + pw - 46, py + 50, 5, WHITE, 1.3)])}
 <g class="up"{dl(.1)}>
-  {sparkle(318, 64, 7, GOOGLE[c], 0)}
+  {sparkle(316, 64, 9, GOOGLE[c], 0)}
   {T(334, 69, a['org'], 11.5, 600, MUTED, "mono", ls=1.6)}
   {T(309, 126, a['title'], 34, 700, INK, ls=-1.4)}
   {T(310, 166, a['title2'], 38, 400, GOOGLE[c] if c != 2 else "#B07D00", "serif")}
@@ -627,31 +652,6 @@ def achievement(a):
             f'<linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/>'
             f'<stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>')
     return svg(W, H, body, f"Achievement {a['no']}: {a['title']} {a['title2']} — {' '.join(a['lines'])}", defs=defs)
-
-
-# ================================================================== FOOTER
-def footer():
-    W, H = 1200, 320
-    head = [("Let's ", {}), ("connect.", {"fam": "serif", "w": 400, "size": 78})]
-    hw = width(head, 66, 700, ls=-2.8)
-    # a starfield across the dark card
-    field = [(90, 80, 10, 0, 0), (180, 250, 6, 3, 1.4), (300, 120, 4, WHITE, .6), (1080, 90, 13, 2, .7),
-             (1010, 250, 8, 1, 2.1), (900, 60, 4, WHITE, 1.8), (1130, 200, 5, 0, 2.6), (420, 280, 4, 2, .2),
-             (760, 290, 5, WHITE, 1.1), (60, 180, 5, WHITE, 2.4), (220, 60, 5, 1, 1.7), (980, 160, 4, WHITE, .4)]
-    body = f"""
-<rect x="16" y="20" width="1168" height="280" rx="32" fill="{INK}"/>
-<rect x="16" y="20" width="1168" height="280" rx="32" fill="url(#glow)"/>
-<g class="up">
-  {T(600 - hw / 2, 140, head, 66, 700, WHITE, ls=-2.8)}
-  {T(600, 186, "Building something consequential with AI? Let's compare notes.", 19, 400, "#A1A1A6", anchor="middle")}
-</g>
-<g class="up"{dl(.3)}>
-  {T(600, 246, "tanmaykala171206@gmail.com", 16, 500, SURFACE, "mono", "middle")}
-</g>
-{sparkles(field)}"""
-    defs = (f'<radialGradient id="glow" cx=".5" cy="1.15" r=".8"><stop offset="0" stop-color="{BLUE}" stop-opacity=".38"/>'
-            f'<stop offset="1" stop-color="{BLUE}" stop-opacity="0"/></radialGradient>')
-    return svg(W, H, body, "Let's connect — tanmaykala171206@gmail.com", defs=defs)
 
 
 if __name__ == "__main__":
