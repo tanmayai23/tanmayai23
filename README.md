@@ -53,14 +53,6 @@
 
 <br><br>
 
-<a href="https://www.linkedin.com/in/tanmay-kala/"><img src="./assets/hello/dock-linkedin.svg" alt="LinkedIn — in/tanmay-kala" width="13%"></a>
-<a href="https://x.com/Tanmayai23"><img src="./assets/hello/dock-x.svg" alt="X — @Tanmayai23" width="13%"></a>
-<a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/dock-email.svg" alt="Email — tanmaykala171206@gmail.com" width="13%"></a>
-<a href="https://www.tanmaykala.dev/"><img src="./assets/hello/dock-portfolio.svg" alt="Portfolio — tanmaykala.dev" width="13%"></a>
-<a href="https://github.com/tanmayai23"><img src="./assets/hello/dock-github.svg" alt="GitHub — @tanmayai23" width="13%"></a>
-
-<br>
-
 <a href="mailto:tanmaykala171206@gmail.com"><img src="./assets/hello/footer.svg" alt="Have an idea? Let's connect — tanmaykala171206@gmail.com · LinkedIn in/tanmay-kala · X @Tanmayai23" width="100%"></a>
 
 </div>
